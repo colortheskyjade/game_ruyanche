@@ -82,6 +82,9 @@ Note: When the user has 1 heart, that means if they lose that heart, they will h
 ### Help Screen
 ![Help](http://f.cl.ly/items/2D1b0a3m03440R0n2u26/gamehelp.png "Help")
 
+### Sample Game Screen (blocks for ships currently)
+![Game](http://f.cl.ly/items/3L0H2Q3R2u2X1E2h1V1H/gameplay.png "Game")
+
 ## CREATE THIS ISSUEEEEEE
 
 ```
