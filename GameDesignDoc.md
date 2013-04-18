@@ -86,7 +86,7 @@ Note: When the user has 1 heart, that means if they lose that heart, they will h
 ![Game](http://f.cl.ly/items/0K3J360g1U1I2v1l2R3a/gameplay.png "Game")
 
 ### Pause Menu
-![Pause](http://f.cl.ly/items/00313x3k1O1U2v2W111f/gamepause.png "Pause")
+![Pause](http://i.imgur.com/MNnXbRD.png "Pause")
 
 ### Game End
 ![End](http://f.cl.ly/items/0g031H0y2C1j0b141x2E/gameend.png "End")
