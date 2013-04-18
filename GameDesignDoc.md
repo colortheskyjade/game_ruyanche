@@ -35,7 +35,7 @@ Notes:
 
 ## How to play the game
 * Keyboard Gameplay
-* Option to choose between WSAD or Arrow Keys
+* Option to choose between WASD or Arrow Keys
 * Either way, space to shoot
 * Esc to bring up the menu, which is mouse-navigated
 
@@ -59,9 +59,16 @@ Note: When the user has 1 heart, that means if they lose that heart, they will h
 
 ## Layout of UI
 * Menus
-* BUttons
+	* Start Menu
+		* BUttons
+	* Pause Menu
+		* Buttons
+	* End Menu
+		* Buttons
 * Actions
+	* What does this mean ):
 * Other UI Components
+
 * What they do
 
 ## Pictures of what your interface would look like
