@@ -3,18 +3,31 @@
 
 ## Things
 1. Red Ship - Mothership
-	* Will move left and right across the screen very fast
-	* Sometimes will try to move downwards towards the user ship in an attempt to "abduct" them (random event)
+	* Will move left and right across the screen with relatively high velocity (hard to shoot)
+	* Sometimes will try to move downwards towards the user ship in an attempt to "abduct" them, pausing when x-coordinates are lined up to fire the tractor beam (random event)
+	* Fires large (wide) bullets infrequently
 	* Looks like a red ship with flashing lights at the top 
-	* *Insert Image Here*
+	* _Insert Image Here_
 2. Blue Ship - Shooting Ship
+	* Will move left and right within approx 50-150 px in the screen, staying in formation
+	* Blue-colored ship
+	* Fires single bullet frequently
+	* _Insert Image Here_
 3. Green Ship - Double Shooting Ship
-4. Projectile
-5. Purple Ship - Suicide Ship
-
-* How they will move
-* What they will look like
-* Images
+	* Will move left, right, up, and/or down within approx 50-150px in the screen, staying in formation
+	* Green-colored ship
+	* Fires two bullets in a row frequently
+	* _Insert Image Here_
+4. Purple Ship - Suicide Ship
+	* Will move l/r/u/d within approx 50-150px in the screen, staying in formation
+	* Purple-colored ship with X across the front
+	* Does not fire bullets
+	* When killed, will immediately drop down off the screen in an attempt to kill the user (user dies on collision)
+5. Projectile
+	* Travels straight, normal to the line of entry
+	* Exists until it collides with another object
+	* Depending on ship that fires it, different image
+	* _Insert Images Here w/ Ship reference_
 
 ## How to play the game
 * Mouse or keyboard?
