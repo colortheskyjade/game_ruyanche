@@ -2,6 +2,16 @@
 ----
 
 ## Things
+1. Red Ship - Mothership
+	* Will move left and right across the screen very fast
+	* Sometimes will try to move downwards towards the user ship in an attempt to "abduct" them (random event)
+	* Looks like a red ship with flashing lights at the top 
+	* *Insert Image Here*
+2. Blue Ship - Shooting Ship
+3. Green Ship - Double Shooting Ship
+4. Projectile
+5. Purple Ship - Suicide Ship
+
 * How they will move
 * What they will look like
 * Images
