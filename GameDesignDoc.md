@@ -73,6 +73,9 @@ Note: When the user has 1 heart, that means if they lose that heart, they will h
 
 ## Pictures of what your interface would look like
 
+### Start Screen
+![Start Screen](http://cl.ly/image/2A421L0n1I3T/gamefront.png "Start Screen")
+
 ## CREATE THIS ISSUEEEEEE
 
 ```
