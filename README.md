@@ -1,12 +1,12 @@
 # Game - Programming Assignments Private Repository
 ### Student Information
-  + Name: Tommy Trojan
-  + USC Email: ttrojan@usc.edu
-  + USC ID: 0123456789
+  + Name: Ruyan Chen
+  + USC Email: ruyanche@usc.edu
+  + USC ID: 2890440150
 
 ### Game Information
-  + Game Name: myAwsomeGame
-  + Game Description: One sentence game description
+  + Game Name: Starships (were meant to fly...)
+  + Game Description: A galaga dupe made in Qt, now with 100% more awesome
   + [Game Design Doc](GameDesignDoc.md)
 
 
