@@ -76,6 +76,12 @@ Note: When the user has 1 heart, that means if they lose that heart, they will h
 ### Start Screen
 ![Start Screen](http://cl.ly/image/2A421L0n1I3T/gamefront.png "Start Screen")
 
+### Options Screen
+![Options](http://f.cl.ly/items/1M2P2s2E3t0d3t150s3S/gameoptions.png "Options")
+
+### Help Screen
+![Help](http://f.cl.ly/items/2D1b0a3m03440R0n2u26/gamehelp.png "Help")
+
 ## CREATE THIS ISSUEEEEEE
 
 ```
