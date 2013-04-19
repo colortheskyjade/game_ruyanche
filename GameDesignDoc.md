@@ -150,19 +150,19 @@ Note: When the user has 1 heart, that means if they lose that heart, they will h
 ## Pictures of what your interface would look like
 
 ### Start Screen
-![Start Screen](http://cl.ly/image/2A421L0n1I3T/gamefront.png "Start Screen")
-
-### Options Screen
-![Options](http://f.cl.ly/items/1M2P2s2E3t0d3t150s3S/gameoptions.png "Options")
+![Start Screen](http://f.cl.ly/items/2G3r3n1I2h3b0S3N270r/gamefront.png "Start Screen")v
 
 ### Help Screen
 ![Help](http://f.cl.ly/items/2D1b0a3m03440R0n2u26/gamehelp.png "Help")
 
-### Sample Game Screen (blocks for ships currently)
+### Sample Game Screen
 ![Game](http://f.cl.ly/items/0K3J360g1U1I2v1l2R3a/gameplay.png "Game")
+* Currently using blocks to represent ships
+* Hearts will be a different color 
+* Color of play ship is yellow for now, but will be determined later
 
 ### Pause Menu
-![Pause](http://i.imgur.com/MNnXbRD.png "Pause")
+![Pause](http://f.cl.ly/items/3u303m1W29402P0m2X40/gamepause.png "Pause")
 
 ### Game End
 ![End](http://f.cl.ly/items/0g031H0y2C1j0b141x2E/gameend.png "End")
