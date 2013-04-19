@@ -31,7 +31,7 @@
 	* Characteristics
 		* Fires average-sized bullets once per cycle
 		* Fires frequently
-	* Apperance
+	* Appearance
 		* Blue ship
 		* *[Insert Image Here]*
 3. Green Ship - Double Shooting Ship
@@ -42,7 +42,7 @@
 	* Characteristics
 		* Fires average-sized bullets twice per cycle (fires two in a row)
 		* Fires frequently
-	* Apperance
+	* Appearance
 		* Green
 		* *[Insert Image Here]*
 4. Purple Ship - Kamikaze Ship
@@ -54,7 +54,7 @@
 		* Does not fire bullet
 		* When killed, will quickly move downwards until off screen
 		* If player collides with the purple ship, they will lose a life
-	* Apperance
+	* Appearance
 		* Purple ship with black "X"
 		* *[Insert Image Here]*
 5. Projectile
@@ -63,7 +63,7 @@
 		* Only travels in the up-down direction
 	* Characteristics
 		* Exists until it collides with another object or goes off screen
-	* Apperance
+	* Appearance
 		* Player bullet
 			* White bullet
 			* Travels relatively quickly
@@ -83,6 +83,17 @@
 			* Heart shaped, red-pink
 			* Travels relatively slow
 			* *[Insert Image Here]*
+6. Beam
+	* Movement
+		* Initial (root) point does not move
+		* Beam grows until it reaches the bottom of the screen or a ship
+		* Beam moves slower than a bullet but faster than a heart (approx halfway between)
+	* Characteristics
+		* Only fired by the red ship
+		* Will stop growing on contact with the player
+	* Appearance
+		* Rainbow colored arcs
+		* *[Insert Image Here]*
 
 Notes:
 * All ships excluding mothership will be given the same (relatively slow) speed, but velocity is randomly generated.
