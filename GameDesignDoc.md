@@ -3,11 +3,18 @@
 
 ## Things
 1. Red Ship - Mothership
-	* Will move left and right across the screen with relatively high velocity (hard to shoot)
-	* Sometimes will try to move downwards towards the user ship in an attempt to "abduct" them, pausing when x-coordinates are lined up to fire the tractor beam (random event)
-	* Fires large (wide) bullets infrequently
-	* Looks like a red ship with flashing lights at the top 
-	* _Insert Image Here_
+	* Movement
+		* Left and right across the screen 
+		* **High** velocity
+		* Will move downwards towards the player in an attempt to abduct them
+	* Characteristics
+		* **Special**: Abduction
+		* Fires wide bullets **infrequently**
+	* Apperance
+		* Red ship
+		* Flashing lights on top
+		* Fires a rainbow colored beam
+		* *[Insert Image Here]*
 2. Blue Ship - Shooting Ship
 	* Will move left and right within approx 50-150 px in the screen, staying in formation
 	* Blue-colored ship
