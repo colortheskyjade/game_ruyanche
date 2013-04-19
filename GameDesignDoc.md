@@ -100,9 +100,10 @@ Notes:
 
 ## How to play the game
 * Keyboard Gameplay
-* Option to choose between WASD or Arrow Keys
-* Either way, space to shoot
-* Esc to bring up the menu, which is mouse-navigated
+>! * Option to choose between WASD or Arrow Keys
+* Arrow keys to move and space to shoot
+* Esc to open/close the pause menu
+* All menus are mouse-navigated only
 
 ## How the score changes
 * Score is calculated by the ship killed
@@ -110,12 +111,10 @@ Notes:
 	* Green - 150pt
 	* Purple - 300pt
 	* Red - 1000pt
-* Score will be cut in half if you lose all your lives and choose to continue
-* Each game only has ONE continue. This is hidden to the user, but they will only be prompted ONCE to continue after death.
 
 ## How to keep track of lives
 * Each user starts with 3 lives (that is, 2 hearts in the life counter)
-* Purple and Red ships VERY INFREQUENTLY drop hearts, which can be picked up for a life
+* Red ships drop hearts upon death about 50% of the time, which can be picked up for a life
 * Each user can have a maximum of 4 extra lives (lives after that will fully heal the user)
 * When a user's HP drops to/below zero, they lose a life, and HP will be restored to 100%. 
 * The game ends when the user runs out of lives.
@@ -125,16 +124,24 @@ Note: When the user has 1 heart, that means if they lose that heart, they will h
 ## Layout of UI
 * Menus
 	* Start Menu
-		* BUttons
+		* Start - Start game
+>!		* Options - Go to options menu
+		* Help - Go to help screen
+		* Quit - Quit the game
+>!	* Options
+>!		* Keyboard - WASD or Arrow Keys
 	* Pause Menu
-		* Buttons
+		* Return to Game - Return to currently paused game
+		* Restart - Restart game
+		* Quit - Exit to menu
 	* End Menu
-		* Buttons
+		* Menu - Exit to menu
+		* Restart - Restart game
+	* Back button on help screen to return to main menu
 * Actions
-	* What does this mean ):
-* Other UI Components
-
-* What they do
+	* Arrow keys to move in gameplay
+	* Spacebar to shoot in gameplay
+	* Esc to toggle the pause menu in gameplay
 
 ## Pictures of what your interface would look like
 
