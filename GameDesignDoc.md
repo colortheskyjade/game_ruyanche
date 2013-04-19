@@ -100,7 +100,6 @@ Notes:
 
 ## How to play the game
 * Keyboard Gameplay
->! Option to choose between WASD or Arrow Keys
 * Arrow keys to move and space to shoot
 * Esc to open/close the pause menu
 * All menus are mouse-navigated only
@@ -125,11 +124,8 @@ Note: When the user has 1 heart, that means if they lose that heart, they will h
 * Menus
 	* Start Menu
 		* Start - Start game
->! Options - Go to options menu
 		* Help - Go to help screen
 		* Quit - Quit the game
->! Options
->! Keyboard - WASD or Arrow Keys
 	* Pause Menu
 		* Return to Game - Return to currently paused game
 		* Restart - Restart game
