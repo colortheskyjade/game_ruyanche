@@ -4,38 +4,85 @@
 ## Things
 1. Red Ship - Mothership
 	* Movement
+		* Located above all other ships
 		* Left and right across the screen 
 		* **High** velocity
 		* Will move downwards towards the player in an attempt to abduct them
 	* Characteristics
 		* **Special**: Abduction
+			* Move downwards towards the player and "hover" there
+			* Fires a tractor beam
+			* If the player is hit by the beam, they will be "captured" and lose a life
+			* Upon success, the mothership flies off screen and can be considered dead
+			* Upon failure, the mothership flies back to the top and resumes normal flight pattern
 		* Fires wide bullets **infrequently**
+		* Only one mothership can be on screen at a time.
+		* May drop heart on death
 	* Apperance
 		* Red ship
 		* Flashing lights on top
 		* Fires a rainbow colored beam
 		* *[Insert Image Here]*
 2. Blue Ship - Shooting Ship
-	* Will move left and right within approx 50-150 px in the screen, staying in formation
-	* Blue-colored ship
-	* Fires single bullet frequently
-	* _Insert Image Here_
+	* Movement
+		* Located in the general ship area
+		* Moves only left and right
+		* Normal velocity
+	* Characteristics
+		* Fires average-sized bullets once per cycle
+		* Fires frequently
+	* Apperance
+		* Blue ship
+		* *[Insert Image Here]*
 3. Green Ship - Double Shooting Ship
-	* Will move left, right, up, and/or down within approx 50-150px in the screen, staying in formation
-	* Green-colored ship
-	* Fires two bullets in a row frequently
-	* _Insert Image Here_
-4. Purple Ship - Suicide Ship
-	* Will move l/r/u/d within approx 50-150px in the screen, staying in formation
-	* Purple-colored ship with X across the front
-	* Does not fire bullets
-	* When killed, will immediately drop down off the screen in an attempt to kill the user (user dies on collision)
+	* Movement
+		* Located in the general ship area
+		* Moves in square patterns (cw and ccw randomly determined)
+		* Normal velocity
+	* Characteristics
+		* Fires average-sized bullets twice per cycle (fires two in a row)
+		* Fires frequently
+	* Apperance
+		* Green
+		* *[Insert Image Here]*
+4. Purple Ship - Kamikaze Ship
+	* Movement
+		* Located in the general ship area
+		* Moves only left and right
+		* Normal velocity
+	* Characteristics
+		* Does not fire bullet
+		* When killed, will quickly move downwards until off screen
+		* If player collides with the purple ship, they will lose a life
+	* Apperance
+		* Purple ship with black "X"
+		* *[Insert Image Here]*
 5. Projectile
-	* Travels straight, normal to the line of entry
-	* Exists until it collides with another object
-	* Depending on ship that fires it, different image
-	* Hearts are "neutral" projectiles that are slower than other projectiles
-	* _Insert Images Here w/ Ship reference_
+	* Movement
+		* Travels straight with predetermined speed
+		* Only travels in the up-down direction
+	* Characteristics
+		* Exists until it collides with another object or goes off screen
+	* Apperance
+		* Player bullet
+			* White bullet
+			* Travels relatively quickly
+			*	Thin
+			* *[Insert Image Here]*
+		* Blue/Green ship bullet
+			* Blue/green bullets, depending on who fired them
+			* Travels relatively quickly
+			*	Thin
+			* *[Insert Image Here]*
+		* Red ship bullet
+			* Red-orange bullet
+			* Travels relatively quickly
+			* Wide (about a ship's width)
+			* *[Insert Image Here]*
+		* Heart
+			* Heart shaped, red-pink
+			* Travels relatively slow
+			* *[Insert Image Here]*
 
 Notes:
 * All ships excluding mothership will be given the same (relatively slow) speed, but velocity is randomly generated.
