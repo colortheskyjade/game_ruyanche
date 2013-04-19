@@ -138,6 +138,14 @@ Note: When the user has 1 heart, that means if they lose that heart, they will h
 	* Arrow keys to move in gameplay
 	* Spacebar to shoot in gameplay
 	* Esc to toggle the pause menu in gameplay
+* HP Bar
+	* Displays the current HP ratio using a green on white bar
+	* Shows the current HP%
+* Hearts Bar
+	* Shows the number of hearts in red
+	* Shows the outline for empty heart slots
+* Score indicator
+	* Shows the current numerical score
 
 ## Pictures of what your interface would look like
 
