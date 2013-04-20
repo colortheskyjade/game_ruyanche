@@ -12,7 +12,7 @@ A high-contrast themed shooting game based on Galaga and similar games. The play
 		* Located above all other ships
 		* Left and right across the screen 
 		* **High** velocity
-		* Will move downwards towards the player in an attempt to abduct them
+		* Will fly offscreen and fly into the abduction section in an attempt to abduct the player
 	* Characteristics
 		* HP: 4
 		* **Special**: Abduction
@@ -188,6 +188,13 @@ Note: When the user has 1 heart, that means if they lose that heart, they will h
 * Currently using blocks to represent ships
 * Hearts will be a different color 
 * Color of play ship is yellow for now, but will be determined later
+
+* The game is split into 4 sections
+	* Top - Mothership section, only one mothership will spawn here at a time
+	* Top-mid - Blue/green ship section, only blue and green ships will spawn here randomly
+	* Bottom-mid - Purple ship section, only purple ships will spawn here
+	* Top-bottom - Abduction section, the mothership will only appear here if it wants to abduct the player
+	* Bottom - Player section, player cannot move out of this section. 
 
 ### Pause Menu
 ![Pause](images/gamepause.png "Pause")
