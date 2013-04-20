@@ -208,19 +208,3 @@ Game Over!
 Good job [user name], your score was #######!
 [encouraging or discouraging message generated based on the score]
 ```
-
-## CREATE THIS ISSUEEEEEE
-
-```
-Title: Milestone 5A Submission
-Label: PA5
-Milestone: 5A
-Assigned to:
-Lecture MW 12pm @sprarage
-Lecture MW 3:30pm @nakulj
-Lecture TTh 12:30pm @Michael-Borke
-Write (issue body): you state:
-Your milestone 5A is ready for grading
-The document file name
-The SHA Hash of the commit to be graded.
-```
