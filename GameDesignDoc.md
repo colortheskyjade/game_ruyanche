@@ -189,7 +189,7 @@ Note: When the user has 1 heart, that means if they lose that heart, they will h
 * Hearts will be a different color 
 * Color of play ship is yellow for now, but will be determined later
 
-* The game is split into 4 sections
+* The game is split into 5 sections
 	* Top - Mothership section, only one mothership will spawn here at a time
 	* Top-mid - Blue/green ship section, only blue and green ships will spawn here randomly
 	* Bottom-mid - Purple ship section, only purple ships will spawn here
