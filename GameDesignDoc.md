@@ -107,6 +107,8 @@ Notes:
 	* Green - 150pt
 	* Purple - 300pt
 	* Red - 1000pt
+* Picking up a heart gives 500pts
+* Currently there are no ways for score to decrease
 
 ## How to keep track of lives
 * Each user starts with 3 lives (that is, 2 hearts in the life counter)
