@@ -19,10 +19,9 @@
 		* Only one mothership can be on screen at a time.
 		* May drop heart on death
 	* Apperance
-		* Red ship
-		* Flashing lights on top
+		* Red ship with flashing lights on top
 		* Fires a rainbow colored beam
-		* *[Insert Image Here]*
+		* ![Red Ship](images/mothership.gif)
 2. Blue Ship - Shooting Ship
 	* Movement
 		* Located in the general ship area
@@ -32,8 +31,8 @@
 		* Fires average-sized bullets once per cycle
 		* Fires frequently
 	* Appearance
-		* Blue ship
-		* *[Insert Image Here]*
+		* Blue inverted triangle
+		* ![Blue Ship](images/blueship.png)
 3. Green Ship - Double Shooting Ship
 	* Movement
 		* Located in the general ship area
@@ -43,8 +42,8 @@
 		* Fires average-sized bullets twice per cycle (fires two in a row)
 		* Fires frequently
 	* Appearance
-		* Green
-		* *[Insert Image Here]*
+		* Green block with a angry face
+		* ![Green Ship](images/greenship.png)
 4. Purple Ship - Kamikaze Ship
 	* Movement
 		* Located in the general ship area
@@ -55,8 +54,8 @@
 		* When killed, will quickly move downwards until off screen
 		* If player collides with the purple ship, they will lose a life
 	* Appearance
-		* Purple ship with black "X"
-		* *[Insert Image Here]*
+		* Upside down purple jellyfish with black "X" for eyes
+		* ![Blue Ship](images/purpleship.png)
 5. Projectile
 	* Movement
 		* Travels straight with predetermined speed
@@ -67,22 +66,20 @@
 		* Player bullet
 			* White bullet
 			* Travels relatively quickly
-			*	Thin
-			* *[Insert Image Here]*
+			* 2px wide, 10px long line
 		* Blue/Green ship bullet
 			* Blue/green bullets, depending on who fired them
 			* Travels relatively quickly
-			*	Thin
-			* *[Insert Image Here]*
+			* 2px wide, 10px long line
 		* Red ship bullet
 			* Red-orange bullet
 			* Travels relatively quickly
-			* Wide (about a ship's width)
-			* *[Insert Image Here]*
+			* Wide
+			* 20px wide, 10px long ellipse
 		* Heart
 			* Heart shaped, red-pink
 			* Travels relatively slow
-			* *[Insert Image Here]*
+			* 20x20 pixels
 6. Beam
 	* Movement
 		* Initial (root) point does not move
@@ -150,22 +147,22 @@ Note: When the user has 1 heart, that means if they lose that heart, they will h
 ## Pictures of what your interface would look like
 
 ### Start Screen
-![Start Screen](http://f.cl.ly/items/2G3r3n1I2h3b0S3N270r/gamefront.png "Start Screen")v
+![Start Screen](images/gamefront.png "Start Screen")v
 
 ### Help Screen
-![Help](http://f.cl.ly/items/2D1b0a3m03440R0n2u26/gamehelp.png "Help")
+![Help](images/gamehelp.png "Help")
 
 ### Sample Game Screen
-![Game](http://f.cl.ly/items/0K3J360g1U1I2v1l2R3a/gameplay.png "Game")
+![Game](images/gameplay.png "Game")
 * Currently using blocks to represent ships
 * Hearts will be a different color 
 * Color of play ship is yellow for now, but will be determined later
 
 ### Pause Menu
-![Pause](http://f.cl.ly/items/3u303m1W29402P0m2X40/gamepause.png "Pause")
+![Pause](images/gamepause.png "Pause")
 
 ### Game End
-![End](http://f.cl.ly/items/0g031H0y2C1j0b141x2E/gameend.png "End")
+![End](images/gameend.png "End")
 
 ## CREATE THIS ISSUEEEEEE
 
