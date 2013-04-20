@@ -1,6 +1,11 @@
 # Game Design Document
 ----
 
+## Overview
+Title: Starships (were meant to fly...)
+
+A high-contrast themed shooting game based on Galaga and similar games. The player is a lone ship, ![Player Ship](images/playership.png), that must try to survive against waves (levels) of invading spaceships.
+
 ## Things
 1. Red Ship - Mothership
 	* Movement
@@ -9,6 +14,7 @@
 		* **High** velocity
 		* Will move downwards towards the player in an attempt to abduct them
 	* Characteristics
+		* HP: 4
 		* **Special**: Abduction
 			* Move downwards towards the player and "hover" there
 			* Fires a tractor beam
@@ -28,6 +34,7 @@
 		* Moves only left and right
 		* Normal velocity
 	* Characteristics
+		* HP: 2	 
 		* Fires average-sized bullets once per cycle
 		* Fires frequently
 	* Appearance
@@ -39,6 +46,7 @@
 		* Moves in square patterns (cw and ccw randomly determined)
 		* Normal velocity
 	* Characteristics
+		* HP: 6
 		* Fires average-sized bullets twice per cycle (fires two in a row)
 		* Fires frequently
 	* Appearance
@@ -50,6 +58,7 @@
 		* Moves only left and right
 		* Normal velocity
 	* Characteristics
+		* HP: 6
 		* Does not fire bullet
 		* When killed, will quickly move downwards until off screen
 		* If player collides with the purple ship, they will lose a life
@@ -89,17 +98,35 @@
 		* Only fired by the red ship
 		* Will stop growing on contact with the player
 	* Appearance
-		* Rainbow colored arcs
-		* *[Insert Image Here]*
+		* Rainbow colored bars, 1px tall and 2px apart
+		* Colors process in ROYGBIV order, then reverse, etc.
 
 Notes:
-* All ships excluding mothership will be given the same (relatively slow) speed, but velocity is randomly generated.
+* All ships excluding mothership will be given the same (relatively slow) speed, but initial velocity is randomly generated.
+* Player's bullet starts with attack 1, then doubles with each level to a max of 8 (where every ship will die with one hit.)
+* Player starts with initial HP 10, which increases by 5 each level
+* Initially, each ship bullet starts with attack 1 (with mothership being attack = 2) and this will double each level.
+* When a ship dies, it will flash twice (OFF ON OFF ON OFF) before disappearing from the game. During this time, all bullets will be absorbed by the ship.)
+* On respawn, player has blinking invincibility for 5 blinks (ON OFF x5 + CONSTANT ON).
 
 ## How to play the game
-* Keyboard Gameplay
-* Arrow keys to move and space to shoot
-* Esc to open/close the pause menu
-* All menus are mouse-navigated only
+
+* Levels
+	* Levels are reached after a player kills all blue/green/purple ships on screen. 
+	* Levels are referred to as waves in the game
+	* Wave 1 starts with 10 b/g/p ships on screen, and this will increase by 5 each level until a maximum of 25 b/g/p ships are on the screen. 
+*Increasing Difficulty
+	* Timer will control the speed of the ships and bullets, which will make each level more difficult
+	* More ships will be added each level
+	* Enemy ships will also fire more frequently each level
+* Player Controls
+	* Player can only move around and shoot, no extra abilities
+	* Player can only move in a region below the ship spaw region, so they cannot be "above" the enemy
+* Technical Gameplay
+	* Keyboard Gameplay
+	* Arrow keys to move and space to shoot
+	* Esc to open/close the pause menu
+	* All menus are mouse-navigated only
 
 ## How the score changes
 * Score is calculated by the ship killed
@@ -149,7 +176,9 @@ Note: When the user has 1 heart, that means if they lose that heart, they will h
 ## Pictures of what your interface would look like
 
 ### Start Screen
-![Start Screen](images/gamefront.png "Start Screen")v
+![Start Screen](images/gamefront.png "Start Screen")
+* Start screen will then lead to a screen that simply asks for a username, with a back button and a start button
+* Username will be displayed at the end when the score is displayed
 
 ### Help Screen
 ![Help](images/gamehelp.png "Help")
@@ -165,6 +194,13 @@ Note: When the user has 1 heart, that means if they lose that heart, they will h
 
 ### Game End
 ![End](images/gameend.png "End")
+* Will actually read:
+
+```
+Game Over!
+Good job [user name], your score was #######!
+[encouraging or discouraging message generated based on the score]
+```
 
 ## CREATE THIS ISSUEEEEEE
 
