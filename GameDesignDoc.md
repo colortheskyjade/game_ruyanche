@@ -24,7 +24,7 @@ A high-contrast themed shooting game based on Galaga and similar games. The play
 		* Fires wide bullets **infrequently**
 		* Only one mothership can be on screen at a time.
 		* May drop heart on death
-	* Apperance
+	* Appearance
 		* Red ship with flashing lights on top
 		* Fires a rainbow colored beam
 		* ![Red Ship](images/mothership.gif)
