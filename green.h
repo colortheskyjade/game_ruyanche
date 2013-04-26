@@ -1,5 +1,5 @@
-#ifndef BLUE_H
-#define BLUE_H
+#ifndef GREEN_H
+#define GREEN_H
 
 #include "thing.h"
 #include "mw.h"
@@ -7,10 +7,10 @@
 
 class MainWindow;
 
-class Blue : public Thing{
+class Green : public Thing{
 	public:
-		Blue(QPixmap* p, int x, int y, MainWindow* mw);
-		~Blue();
+		Green(QPixmap* p, int x, int y, MainWindow* mw);
+		~Green();
 		
 		void move();
 		void action();
@@ -18,6 +18,9 @@ class Blue : public Thing{
 	private:
 		int maxX;
 		int minX;
+		int maxY;
+		int minY;
+		bool ccw;
 		int count;
 		int hp;
 		int attack;

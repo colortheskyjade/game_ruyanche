@@ -27,6 +27,7 @@
 #include "thing.h"
 #include "blue.h"
 #include "bullet.h"
+#include "green.h"
 
 #define W_X 600
 #define W_Y 600
@@ -39,7 +40,7 @@ class MainWindow : public QMainWindow{
 //		~MainWindow();
 		
 		void show();
-		void makeBullet(int x, int y, bool up, bool red, int attack);
+		void makeBullet(int x, int y, bool up, int attack);
 	
 	public slots:
 		void handleTimer();
