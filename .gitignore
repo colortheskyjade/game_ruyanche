@@ -3,6 +3,8 @@
 Makefile
 moc_*
 
+game_ruyanche
+
 #Doxygen
 config.txt
 html/*

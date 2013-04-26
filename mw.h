@@ -29,6 +29,7 @@
 #include "bullet.h"
 #include "green.h"
 #include "purple.h"
+#include "red.h"
 
 #define W_X 600
 #define W_Y 600

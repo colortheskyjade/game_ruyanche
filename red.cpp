@@ -1,11 +1,13 @@
 #include "red.h"
 
 Red::Red(QPixmap* p, QPixmap* p2_, QPixmap* p3_, int x, int y, MainWindow* mw, Player* pl) : Thing(p, x, y, 25, 25){
+	p1 = p;
 	p2 = p2_;
 	p3 = p3_;
 	m = mw;
 	human = pl;
 	state = 0;
+	ani = 0;
 	vy = 0;
 	vx = 5 * pow(-1, rand() % 2);
 
@@ -21,7 +23,20 @@ Red::~Red(){
 
 void Red::move(){
 	if(!state){
-		if(!(count % 5)){
+		if(!(count % 2)){
+			if(ani < 10){
+				setPixmap(*p1);
+				ani++;
+			}
+			else if(ani < 20){
+				setPixmap(*p2);
+				ani++;
+			}
+			else{
+				setPixmap(*p3);
+				ani++;
+				ani = ani % 30;
+			}
 			x += vx;
 		
 			if(x <= minX){vx = vx * -1; x += vx;}
