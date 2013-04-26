@@ -1,23 +1,28 @@
 #include "gscene.h"
 
-GScene::GScene() : QGraphicsScene(){}
+GScene::GScene(MainWindow *mw) : QGraphicsScene(), m(mw){}
 
 void GScene::keyPressEvent( QKeyEvent *e ) {
+	int v = 5;
 	switch ( e->key() ) {
 		case Qt::Key_Left :
-			std::cout << "L" << std::endl;
+			m->moveP(-1 * v, 0);
 			break;
 		case Qt::Key_Right :
-			std::cout << "R" << std::endl;
+			m->moveP(v, 0);
 			break;
 		case Qt::Key_Up :
-			std::cout << "U" << std::endl;
+			m->moveP(0, -1 * v);
 			break;
 		case Qt::Key_Down :
-			std::cout << "D" << std::endl;
+			m->moveP(0, v);
 			break;
 		case Qt::Key_Space :
-			std::cout << "S" << std::endl;
+			m->shootP();
+			break;
+		case Qt::Key_Escape :
+			if(m->isPaused()){m->resumeGame();}
+			else{m->pauseGame();}
 			break;
 	}
 }

@@ -1,6 +1,12 @@
 #include "mw.h"
 
 MainWindow::MainWindow() : QMainWindow(){
+	// Initialize variables
+	pvx = 0; pvy = 0;
+	attack = 1;
+	pattack = false;
+	paused = false;
+	
 	// Master Timer
 	timer = new QTimer;
 	gameSpeed = 15;
@@ -23,7 +29,7 @@ MainWindow::MainWindow() : QMainWindow(){
 	widebulletpic = new QPixmap("images/redbullet.png");
   
 	//Initialize the Scenes and Views
-  gameScene = new GScene();
+  gameScene = new GScene(this);
   gameView = new QGraphicsView(gameScene);
   
   //Set the attributes to the game scene
@@ -54,57 +60,86 @@ MainWindow::MainWindow() : QMainWindow(){
 
 }
 
+//****************************
+//****** SLOTS SLOTS *********
+//****************************
+
 void MainWindow::handleTimer(){
+	// move all enemies
 	for(unsigned int i = 0; i < enemies.size(); i++){
 		enemies[i]->move();
 		enemies[i]->action();
 	}
+	// move all bullets
 	for(unsigned int i = 0; i < bullets.size(); i++){
 		bullets[i]->move();
 		bullets[i]->action();
 	}
-	human->doAttack();
+	// do the queued player things
+	if(pvx || pvy){
+		human->move(pvx,pvy);
+		pvx = 0; pvy = 0;
+	}
+	if(pattack){
+		human->doAttack();
+		pattack = false;
+	}
 }
 
-void MainWindow::makeBullet(int x, int y, bool up, int attack){
+//****************************
+//**** BULLETS BULLETS *******
+//****************************
+
+void MainWindow::makeBullet(int x, int y, bool up, int attack2){
 	Thing* addMe = new Bullet(bulletpic,x,y,up,attack);
 	gameScene->addItem(addMe);
   bullets.push_back(addMe);
 }
 
-void MainWindow::makeBigBullet(int x, int y, int attack){
+void MainWindow::makeBigBullet(int x, int y, int attack2){
 	Thing* addMe = new Bullet(widebulletpic,x,y,false,attack);
 	gameScene->addItem(addMe);
   bullets.push_back(addMe);
 }
 
-void MainWindow::makePlayerBullet(int x, int y, int attack){
+void MainWindow::makePlayerBullet(int x, int y){
 	Thing* addMe = new Bullet(bulletpic,x,y,true,attack);
 	gameScene->addItem(addMe);
   bullets.push_back(addMe);
+}
+
+//****************************
+//*** PLAYER DOES STUFF ******
+//****************************
+
+void MainWindow::moveP(int vx, int vy){
+	pvx = vx;
+	pvy = vy;
+}
+
+void MainWindow::shootP(){
+	pattack = true;
+}
+
+//****************************
+//*** GAME STATE CHANGE ******
+//****************************
+
+bool MainWindow::isPaused(){
+	return paused;
+}
+
+void MainWindow::pauseGame(){
+	timer->stop();
+	paused = true;
+}
+
+void MainWindow::resumeGame(){
+	timer->start();
+	paused = false;
 }
 
 void MainWindow::show(){
 	gameView->show();
 	timer->start();
 }
-
-//void MainWindow::keyPressEvent( QKeyEvent *e ) {
-//	switch ( e->key() ) {
-//		case Qt::Key_Left :
-//			std::cout << "L" << std::endl;
-//			break;
-//		case Qt::Key_Right :
-//			std::cout << "R" << std::endl;
-//			break;
-//		case Qt::Key_Up :
-//			std::cout << "U" << std::endl;
-//			break;
-//		case Qt::Key_Down :
-//			std::cout << "D" << std::endl;
-//			break;
-//		case Qt::Key_Space :
-//			std::cout << "S" << std::endl;
-//			break;
-//	}
-//}

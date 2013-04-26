@@ -21,7 +21,7 @@ void Player::move(int vx, int vy){
 }
 
 void Player::doAttack(){
- 	m->makePlayerBullet(x+14,y,attack);
+ 	m->makePlayerBullet(x+14,y);
 }
 
 void Player::action(){

@@ -28,7 +28,6 @@ class Player : public QGraphicsPixmapItem {
 		int hp;
 		bool invincible;
 		MainWindow *m;
-		int attack;
 };
 
 #endif

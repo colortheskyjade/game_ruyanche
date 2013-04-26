@@ -4,11 +4,16 @@
 #include <iostream>
 #include <QGraphicsScene>
 #include <QKeyEvent>
+#include "mw.h"
+
+class MainWindow;
 
 class GScene : public QGraphicsScene{
 	public:
-		GScene();
+		GScene(MainWindow*);
 		void keyPressEvent(QKeyEvent *e);
+	private:
+		MainWindow *m;
 };
 
 #endif

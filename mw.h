@@ -44,20 +44,35 @@ class MainWindow : public QMainWindow{
 //		~MainWindow();
 		
 		void show();
+		
+		// Game States
+		void pauseGame();
+		void resumeGame();
+		bool isPaused();
+		
+		// Make bullets
 		void makeBullet(int x, int y, bool up, int attack);
 		void makeBigBullet(int x, int y, int attack);
-		void makePlayerBullet(int x, int y, int attack);
+		void makePlayerBullet(int x, int y);
+		
+		// Make beam
+		
+		// Player queued actions
+		void moveP(int, int);
+		void shootP();
+		
+		// Collision handling
 	
 	public slots:
 		void handleTimer();
-	protected:
-//		void keyPressEvent(QKeyEvent *e);
 	
 	private:
 		QTimer * timer;
 		QGraphicsScene *gameScene;
 		QGraphicsView *gameView;
 		QPixmap *ab1, *ab2, *ag1, *ag2, *apl, *ap, *ar1, *ar2, *ar3, *bulletpic, *widebulletpic, *heartpic;
+		int gameSpeed, attack;
+		bool paused;
 		
 		std::vector<Thing*> enemies;
 		std::vector<Thing*> bullets;
@@ -65,7 +80,9 @@ class MainWindow : public QMainWindow{
 		
 		Player* human;
 		
-		int gameSpeed;
+		//queued actions
+		int pvx, pvy;
+		bool pattack;
 };
 
 #endif
