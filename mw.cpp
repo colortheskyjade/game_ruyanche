@@ -37,8 +37,8 @@ MainWindow::MainWindow() : QMainWindow(){
   connect(timer, SIGNAL(timeout()), this, SLOT(handleTimer()));
   
   //This is me testing
-  Thing* test1 = new Green(ag1, 100, 100, this);
-  Thing* test2 = new Green(ag2, 300, 300, this);
+  Thing* test1 = new Purple(ap, 100, 100, this);
+  Thing* test2 = new Purple(ap, 300, 300, this);
   enemies.push_back(test1);
   enemies.push_back(test2);
   gameScene->addItem(test1);
@@ -54,6 +54,12 @@ void MainWindow::handleTimer(){
 		bullets[i]->move();
 		bullets[i]->action();
 	}
+}
+
+void MainWindow::makeBullet(int x, int y, bool up, int attack){
+	Thing* addMe = new Bullet(bulletpic,x,y,up,attack);
+	gameScene->addItem(addMe);
+  bullets.push_back(addMe);
 }
 
 void MainWindow::makeBullet(int x, int y, bool up, int attack){
