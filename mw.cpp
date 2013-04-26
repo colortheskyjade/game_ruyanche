@@ -23,7 +23,7 @@ MainWindow::MainWindow() : QMainWindow(){
 	widebulletpic = new QPixmap("images/redbullet.png");
   
 	//Initialize the Scenes and Views
-  gameScene = new QGraphicsScene();
+  gameScene = new GScene();
   gameView = new QGraphicsView(gameScene);
   
   //Set the attributes to the game scene
@@ -47,6 +47,11 @@ MainWindow::MainWindow() : QMainWindow(){
 //  enemies.push_back(test2);
   gameScene->addItem(test1);
 //  gameScene->addItem(test2);
+
+	//Set the focus
+	setFocus();
+//	setCentralWidget(gameView);
+
 }
 
 void MainWindow::handleTimer(){
@@ -83,3 +88,23 @@ void MainWindow::show(){
 	gameView->show();
 	timer->start();
 }
+
+//void MainWindow::keyPressEvent( QKeyEvent *e ) {
+//	switch ( e->key() ) {
+//		case Qt::Key_Left :
+//			std::cout << "L" << std::endl;
+//			break;
+//		case Qt::Key_Right :
+//			std::cout << "R" << std::endl;
+//			break;
+//		case Qt::Key_Up :
+//			std::cout << "U" << std::endl;
+//			break;
+//		case Qt::Key_Down :
+//			std::cout << "D" << std::endl;
+//			break;
+//		case Qt::Key_Space :
+//			std::cout << "S" << std::endl;
+//			break;
+//	}
+//}

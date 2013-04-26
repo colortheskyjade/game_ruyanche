@@ -31,6 +31,7 @@
 #include "purple.h"
 #include "red.h"
 #include "player.h"
+#include "gscene.h"
 
 #define W_X 600
 #define W_Y 600
