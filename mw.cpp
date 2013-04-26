@@ -19,8 +19,8 @@ MainWindow::MainWindow() : QMainWindow(){
   
   QBrush bg(QPixmap("images/background.png"));
   gameScene->setBackgroundBrush(bg);
-  gameScene->setSceneRect(0,0,500,700);
-  gameView->setFixedSize(505,705);
+  gameScene->setSceneRect(0,0,425,600);
+  gameView->setFixedSize(430,605);
   
   //Connecting the timer to many things
   connect(timer, SIGNAL(timeout()), this, SLOT(handleTimer()));
