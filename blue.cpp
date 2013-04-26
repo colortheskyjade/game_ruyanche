@@ -40,7 +40,7 @@ void Blue::move(){
 void Blue::action(){
 	if(count == 20){
 		if(!(rand()%15)){
-			m->makeBullet(x+12,y+25,false,attack);
+			m->makeBullet(x+14,y+25,false,attack);
 		}
 		count = 0;
 	}

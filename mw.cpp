@@ -37,6 +37,9 @@ MainWindow::MainWindow() : QMainWindow(){
   //Connecting the timer to many things
   connect(timer, SIGNAL(timeout()), this, SLOT(handleTimer()));
   
+  human = new Player(apl,300,500,this);
+  gameScene->addItem(human);
+  
   //This is me testing
   Thing* test1 = new Red(ar1, ar2, ar3, 50, 100, this);
 //  Thing* test2 = new Purple(ap, 300, 300, this);
@@ -55,6 +58,7 @@ void MainWindow::handleTimer(){
 		bullets[i]->move();
 		bullets[i]->action();
 	}
+	human->doAttack();
 }
 
 void MainWindow::makeBullet(int x, int y, bool up, int attack){
@@ -65,6 +69,12 @@ void MainWindow::makeBullet(int x, int y, bool up, int attack){
 
 void MainWindow::makeBigBullet(int x, int y, int attack){
 	Thing* addMe = new Bullet(widebulletpic,x,y,false,attack);
+	gameScene->addItem(addMe);
+  bullets.push_back(addMe);
+}
+
+void MainWindow::makePlayerBullet(int x, int y, int attack){
+	Thing* addMe = new Bullet(bulletpic,x,y,true,attack);
 	gameScene->addItem(addMe);
   bullets.push_back(addMe);
 }

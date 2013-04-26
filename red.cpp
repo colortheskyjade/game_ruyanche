@@ -53,7 +53,7 @@ void Red::move(){
 void Red::action(){
 	if(count == 60){
 		if(!(rand()%15)){
-			m->makeBigBullet(x+12,y+25,attack);
+			m->makeBigBullet(x+14,y+25,attack);
 		}
 		count = 0;
 	}

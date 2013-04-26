@@ -25,7 +25,7 @@ class Red : public Thing{
 		int attack;
 		MainWindow *m;
 		Player* human;
-		int state; //0 = normal, 1 = "dead", 2 = actually dead
+		int state;
 		int ani;
 };
 

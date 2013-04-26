@@ -30,6 +30,7 @@
 #include "green.h"
 #include "purple.h"
 #include "red.h"
+#include "player.h"
 
 #define W_X 600
 #define W_Y 600
@@ -44,6 +45,7 @@ class MainWindow : public QMainWindow{
 		void show();
 		void makeBullet(int x, int y, bool up, int attack);
 		void makeBigBullet(int x, int y, int attack);
+		void makePlayerBullet(int x, int y, int attack);
 	
 	public slots:
 		void handleTimer();
@@ -60,7 +62,7 @@ class MainWindow : public QMainWindow{
 		std::vector<Thing*> bullets;
 		Thing * tractorB;
 		
-		Thing* player;
+		Player* human;
 		
 		int gameSpeed;
 };

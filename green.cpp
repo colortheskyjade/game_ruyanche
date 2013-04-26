@@ -99,8 +99,8 @@ void Green::move(){
 void Green::action(){
 	if(count == 20){
 		if(!(rand()%20)){
-			m->makeBullet(x+12,y+35,false,attack);
-			m->makeBullet(x+13,y+25,false,attack);
+			m->makeBullet(x+13,y+35,false,attack);
+			m->makeBullet(x+15,y+25,false,attack);
 		}
 		count = 0;
 	}
