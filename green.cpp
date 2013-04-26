@@ -7,10 +7,11 @@ Green::Green(QPixmap* p, int x, int y, MainWindow* mw) : Thing(p, x, y, 25, 25){
 	vy = 0;
 	vx = 1;
 	ccw = false;
-	if(rand() % 2){
+	if(rand() % 2 == 1){
 		vx = 0;
 		vy = 1;
 		ccw = true;
+		std::cout << "ME" << std::endl;
 	}
 	
 	// set boundaries
@@ -39,7 +40,7 @@ void Green::move(){
 		x += vx;
 		y += vy;
 		
-		if(ccw){
+		if(!ccw){
 			if(x <= minX && y <= minY){
 				vy = 0;
 				vx = 1;

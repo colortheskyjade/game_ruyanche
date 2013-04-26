@@ -8,7 +8,17 @@ MainWindow::MainWindow() : QMainWindow(){
 	srand(time(0));
 	
 	// Load ALL THE PICTURES
-	bluepic = new QPixmap("images/blueship.png");
+	
+	ab1 = new QPixmap("images/actualblue-1.png");
+  ab2 = new QPixmap("images/actualblue-2.png");
+  ag1 = new QPixmap("images/actualgreen-1.png");
+  ag2 = new QPixmap("images/actualgreen-2.png");
+  apl = new QPixmap("images/actualplayer.png");
+  ap = new QPixmap("images/actualpurple.png");
+  ar1 = new QPixmap("images/actualred-1.png");
+  ar2 = new QPixmap("images/actualred-2.png");
+  ar3 = new QPixmap("images/actualred-3.png");
+  
 	bulletpic = new QPixmap("images/bullet.png");
   
 	//Initialize the Scenes and Views
@@ -27,8 +37,8 @@ MainWindow::MainWindow() : QMainWindow(){
   connect(timer, SIGNAL(timeout()), this, SLOT(handleTimer()));
   
   //This is me testing
-  Thing* test1 = new Green(bluepic, 100, 100, this);
-  Thing* test2 = new Green(bluepic, 300, 100, this);
+  Thing* test1 = new Green(ag1, 100, 100, this);
+  Thing* test2 = new Green(ag2, 300, 300, this);
   enemies.push_back(test1);
   enemies.push_back(test2);
   gameScene->addItem(test1);

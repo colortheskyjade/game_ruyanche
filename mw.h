@@ -51,7 +51,7 @@ class MainWindow : public QMainWindow{
 		QTimer * timer;
 		QGraphicsScene *gameScene;
 		QGraphicsView *gameView;
-		QPixmap *redpic, *bluepic, *greenpic, *purplepic, *bulletpic, *beampic;
+		QPixmap *ab1, *ab2, *ag1, *ag2, *apl, *ap, *ar1, *ar2, *ar3, *bulletpic, *widebulletpic, *heartpic;
 		
 		std::vector<Thing*> enemies;
 		std::vector<Thing*> bullets;
