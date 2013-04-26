@@ -3,7 +3,8 @@
 #include <cmath>
 #include <iostream>
 
-Blue::Blue(QPixmap* p, int x, int y) : Thing(p, x, y, 25, 25){
+Blue::Blue(QPixmap* p, int x, int y, MainWindow* mw) : Thing(p, x, y, 25, 25){
+	m = mw;
 	vy = 0;
 	vx = 2 * pow(-1, rand() % 2);
 	std::cout << vx << std::endl;
@@ -37,5 +38,5 @@ void Blue::move(){
 }
 
 void Blue::action(){
-
+	
 }

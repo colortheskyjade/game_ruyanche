@@ -19,13 +19,14 @@ MainWindow::MainWindow() : QMainWindow(){
   
   QBrush bg(QPixmap("images/background.png"));
   gameScene->setBackgroundBrush(bg);
-  gameView->setFixedSize(500,700);
+  gameScene->setSceneRect(0,0,500,700);
+  gameView->setFixedSize(505,705);
   
   //Connecting the timer
   connect(timer, SIGNAL(timeout()), this, SLOT(handleTimer()));
   
-  Thing* test1 = new Blue(bluepic, 100, 100);
-  Thing* test2 = new Blue(bluepic, 200, 100);
+  Thing* test1 = new Blue(bluepic, 100, 100, this);
+  Thing* test2 = new Blue(bluepic, 375, 100, this);
   enemies.push_back(test1);
   enemies.push_back(test2);
   gameScene->addItem(test1);
@@ -35,6 +36,7 @@ MainWindow::MainWindow() : QMainWindow(){
 void MainWindow::handleTimer(){
 	for(unsigned int i = 0; i < enemies.size(); i++){
 		enemies[i]->move();
+		enemies[i]->action();
 	}
 }
 
