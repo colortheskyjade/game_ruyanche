@@ -7,7 +7,7 @@ MainWindow::MainWindow() : QMainWindow(){
 	timer->setInterval(gameSpeed);
 	srand(time(0));
 	
-	// Load Pictures
+	// Load ALL THE PICTURES
 	bluepic = new QPixmap("images/blueship.png");
   
 	//Initialize the Scenes and Views
@@ -22,9 +22,11 @@ MainWindow::MainWindow() : QMainWindow(){
   gameScene->setSceneRect(0,0,500,700);
   gameView->setFixedSize(505,705);
   
-  //Connecting the timer
+  //Connecting the timer to many things
   connect(timer, SIGNAL(timeout()), this, SLOT(handleTimer()));
   
+  
+  //This is me testing
   Thing* test1 = new Blue(bluepic, 100, 100, this);
   Thing* test2 = new Blue(bluepic, 375, 100, this);
   enemies.push_back(test1);
@@ -38,6 +40,10 @@ void MainWindow::handleTimer(){
 		enemies[i]->move();
 		enemies[i]->action();
 	}
+}
+
+void MainWindow::makeBullet(int x, int y, bool up, bool red, int attack){
+  bullets.push_back(new Bullet(bulletpic,x,y,up,red,attack));
 }
 
 void MainWindow::show(){
