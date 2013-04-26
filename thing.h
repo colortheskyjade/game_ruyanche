@@ -11,14 +11,15 @@ class Thing : public QGraphicsPixmapItem {
 		
 		virtual void move() = 0;
 		virtual void action() = 0;
+		virtual bool isValid() = 0;
+		
+		virtual void gotHit(int);
+		
+		int getX();
+		int getY();
 		
 	protected:
-		int x;
-		int y;
-		int vx;
-		int vy;
-		int h;
-		int w;
+		int x, y, vx, vy, h, w, hp;
 		QPixmap *pixMap;
 };
 

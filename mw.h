@@ -22,6 +22,8 @@
 // C++ Things
 #include <cstdlib>
 #include <iostream>
+#include <deque>
+#include <sstream>
 
 // Others
 #include "thing.h"
@@ -51,8 +53,9 @@ class MainWindow : public QMainWindow{
 		bool isPaused();
 		
 		// Make bullets
-		void makeBullet(int x, int y, bool up, int attack);
-		void makeBigBullet(int x, int y, int attack);
+		void makeBlueBullet(int x, int y);
+		void makeGreenBullet(int x, int y);
+		void makeBigBullet(int x, int y);
 		void makePlayerBullet(int x, int y);
 		
 		// Make beam
@@ -70,15 +73,18 @@ class MainWindow : public QMainWindow{
 		QTimer * timer;
 		QGraphicsScene *gameScene;
 		QGraphicsView *gameView;
-		QPixmap *ab1, *ab2, *ag1, *ag2, *apl, *ap, *ar1, *ar2, *ar3, *bulletpic, *widebulletpic, *heartpic;
+		QPixmap *ab1, *ab2, *ag1, *ag2, *apl, *ap, *ar1, *ar2, *ar3, *pbullet, *bbullet, *gbullet, *widebulletpic, *heartpic;
+		QLabel * hpL;
 		int gameSpeed, attack;
 		bool paused;
 		
 		std::vector<Thing*> enemies;
-		std::vector<Thing*> bullets;
+		std::vector<Thing*> ebullets;
+		std::vector<Thing*> pbullets;
 		Thing * tractorB;
 		
 		Player* human;
+		int maxhp;
 		
 		//queued actions
 		int pvx, pvy;

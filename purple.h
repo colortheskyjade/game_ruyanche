@@ -15,13 +15,11 @@ class Purple : public Thing{
 		
 		void move();
 		void action();
+		bool isValid();
 		
 	private:
-		int maxX;
-		int minX;
-		int count;
-		int hp;
-		int attack;
+		int maxX, minX, count;
+		bool valid; 
 		MainWindow *m;
 		Player* human;
 		int state; //0 = normal, 1 = "dead", 2 = actually dead

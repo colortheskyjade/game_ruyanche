@@ -1,6 +1,8 @@
 #include "purple.h"
 
 Purple::Purple(QPixmap* p, int x, int y, MainWindow* mw, Player* pl) : Thing(p, x, y, 25, 25){
+	hp = 6;
+	valid = true;
 	m = mw;
 	human = pl;
 	state = 0;
@@ -10,9 +12,9 @@ Purple::Purple(QPixmap* p, int x, int y, MainWindow* mw, Player* pl) : Thing(p, 
 	count = 0;
 	
 	// set boundaries
-	int temp = rand() % 100;
+	int temp = rand() % 150;
 	minX = x - temp;
-	maxX = x + 100 - temp;
+	maxX = x + 150 - temp;
 	
 	if(minX < 0){
 		minX = 0;
@@ -23,6 +25,10 @@ Purple::Purple(QPixmap* p, int x, int y, MainWindow* mw, Player* pl) : Thing(p, 
 }
 
 Purple::~Purple(){
+}
+
+bool Purple::isValid(){
+	return valid;
 }
 
 void Purple::move(){

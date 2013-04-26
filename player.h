@@ -18,6 +18,11 @@ class Player : public QGraphicsPixmapItem {
 		void gotHit(int attack);
 		bool isInvincible();
 		void doAttack();
+		void setHP(int);
+		
+		int getHP();
+		int getX();
+		int getY();
 		
 	protected:
 		int x;

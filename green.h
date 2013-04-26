@@ -9,22 +9,18 @@ class MainWindow;
 
 class Green : public Thing{
 	public:
-		Green(QPixmap* p, int x, int y, MainWindow* mw);
+		Green(QPixmap*, QPixmap*, int, int, MainWindow*);
 		~Green();
 		
 		void move();
 		void action();
+		bool isValid();
 		
 	private:
-		int maxX;
-		int minX;
-		int maxY;
-		int minY;
-		bool ccw;
-		int count;
-		int hp;
-		int attack;
+		int maxX, minX, maxY, minY, count, attack, anim;
+		bool ccw, valid;
 		MainWindow *m;
+		QPixmap *p1, *p2;
 };
 
 #endif

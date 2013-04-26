@@ -15,18 +15,14 @@ class Red : public Thing{
 		
 		void move();
 		void action();
+		bool isValid();
 		
 	private:
 		QPixmap *p1, *p2, *p3;
-		int maxX;
-		int minX;
-		int count;
-		int hp;
-		int attack;
+		int maxX, minX, count, attack, state, ani;
 		MainWindow *m;
 		Player* human;
-		int state;
-		int ani;
+		bool valid;
 };
 
 #endif

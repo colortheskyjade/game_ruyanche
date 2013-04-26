@@ -1,8 +1,13 @@
 #include "green.h"
 
-Green::Green(QPixmap* p, int x, int y, MainWindow* mw) : Thing(p, x, y, 25, 25){
+Green::Green(QPixmap* p, QPixmap* p2_, int x, int y, MainWindow* mw) : Thing(p, x, y, 25, 25){
+	hp = 6;
+	valid = true;
+	p1 = p;
+	p2 = p2_;
 	m = mw;
 	count = 0;
+	anim = rand() % 10;
 	
 	vy = 0;
 	vx = 1;
@@ -34,9 +39,24 @@ Green::Green(QPixmap* p, int x, int y, MainWindow* mw) : Thing(p, x, y, 25, 25){
 
 Green::~Green(){
 }
+
+bool Green::isValid(){
+	return valid;
+}
 		
 void Green::move(){
 	if(!(count % 5)){
+		if(anim < 5){
+			setPixmap(*p1);
+			anim++;
+		}
+		else {
+			anim++;
+			anim = anim % 10;
+			setPixmap(*p2);
+		}
+
+		
 		x += vx;
 		y += vy;
 		
@@ -96,11 +116,11 @@ void Green::move(){
 		setPos(x,y);
 	}
 }
+
 void Green::action(){
-	if(count == 20){
+	if(count == 15){
 		if(!(rand()%20)){
-			m->makeBullet(x+13,y+35,false,attack);
-			m->makeBullet(x+15,y+25,false,attack);
+			m->makeGreenBullet(x+13,y+35);
 		}
 		count = 0;
 	}

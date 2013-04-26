@@ -2,7 +2,12 @@
 #define BULLET_H
 
 #include "thing.h"
+#include "player.h"
 #include <QPixmap>
+#include <cmath>
+#include <cstdlib>
+
+class Player;
 
 class Bullet : public Thing{
 	public:
@@ -11,10 +16,13 @@ class Bullet : public Thing{
 		
 		void move();
 		void action();
+		bool isValid();
+		bool isCollides(Player*);
+		bool isCollides(Thing*);
+		int getAttack();
 		
 	private:
-		bool up;
-		bool red;
+		bool up, red, valid;
 		int attack;
 };
 

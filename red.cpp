@@ -1,6 +1,8 @@
 #include "red.h"
 
 Red::Red(QPixmap* p, QPixmap* p2_, QPixmap* p3_, int x, int y, MainWindow* mw, Player* pl) : Thing(p, x, y, 25, 25){
+	hp = 4;
+	valid = true;
 	p1 = p;
 	p2 = p2_;
 	p3 = p3_;
@@ -19,6 +21,10 @@ Red::Red(QPixmap* p, QPixmap* p2_, QPixmap* p3_, int x, int y, MainWindow* mw, P
 }
 
 Red::~Red(){
+}
+
+bool Red::isValid(){
+	return valid;
 }
 
 void Red::move(){
@@ -51,9 +57,9 @@ void Red::move(){
 }
 
 void Red::action(){
-	if(count == 60){
+	if(count == 20){
 		if(!(rand()%15)){
-			m->makeBigBullet(x+14,y+25,attack);
+			m->makeBigBullet(x+14,y+25);
 		}
 		count = 0;
 	}

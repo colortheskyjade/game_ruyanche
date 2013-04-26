@@ -9,6 +9,7 @@ Player::Player(QPixmap *pm, int nx, int ny, MainWindow * mw) : QGraphicsPixmapIt
 	w = 25;
 	setPos(x, y);
 	m = mw;
+	hp = 10;
 }
 
 Player::~Player(){
@@ -32,9 +33,25 @@ bool Player::isDead(){
 }
 
 void Player::gotHit(int attack){
-	hp -= attack;
+		hp -= attack;
 }
 
 bool Player::isInvincible(){
 	return invincible;
+}
+
+int Player::getHP(){
+	return hp;
+}
+
+void Player::setHP(int hp_){
+	hp = hp_;
+}
+
+int Player::getX(){
+	return x;
+}
+
+int Player::getY(){
+	return y;
 }

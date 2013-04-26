@@ -6,6 +6,7 @@ MainWindow::MainWindow() : QMainWindow(){
 	attack = 1;
 	pattack = false;
 	paused = false;
+	maxhp = 10;
 	
 	// Master Timer
 	timer = new QTimer;
@@ -25,7 +26,9 @@ MainWindow::MainWindow() : QMainWindow(){
   ar2 = new QPixmap("images/actualred-2.png");
   ar3 = new QPixmap("images/actualred-3.png");
   
-	bulletpic = new QPixmap("images/bullet.png");
+	pbullet = new QPixmap("images/bullet.png");
+	bbullet = new QPixmap("images/bluebullet.png");
+	gbullet = new QPixmap("images/greenbullet.png");
 	widebulletpic = new QPixmap("images/redbullet.png");
   
 	//Initialize the Scenes and Views
@@ -40,20 +43,36 @@ MainWindow::MainWindow() : QMainWindow(){
   gameScene->setSceneRect(0,0,425,600);
   gameView->setFixedSize(430,605);
   
-  //Connecting the timer to many things
+  //	Connecting the timer to many things
   connect(timer, SIGNAL(timeout()), this, SLOT(handleTimer()));
   
+  // Make the labels
+  hpL = new QLabel("HP: 100%");
+  hpL->setGeometry(QRect(355,570,100,25));
+  hpL->setStyleSheet("background-color:rgba(0,0,0,0); color:#ffffff;");
+  gameScene->addWidget(hpL);
+  
+  // I made the human player here
   human = new Player(apl,300,500,this);
   gameScene->addItem(human);
   
   //This is me testing
-  Thing* test1 = new Red(ar1, ar2, ar3, 50, 100, this);
-//  Thing* test2 = new Purple(ap, 300, 300, this);
+  Thing* test1 = new Red(ar1, ar2, ar3, 30, 25, this);
   enemies.push_back(test1);
-//  enemies.push_back(test2);
   gameScene->addItem(test1);
-//  gameScene->addItem(test2);
 
+  Thing* test2 = new Green(ag1, ag2, 50, 100, this);
+  enemies.push_back(test2);
+  gameScene->addItem(test2);
+  
+  Thing* test3 = new Blue(ab1, ab2, 50, 177, this);
+  enemies.push_back(test3);
+  gameScene->addItem(test3);
+  
+  Thing* test4 = new Purple(ap, 50, 400, this);
+  enemies.push_back(test4);
+  gameScene->addItem(test4);
+  
 	//Set the focus
 	setFocus();
 //	setCentralWidget(gameView);
@@ -67,14 +86,69 @@ MainWindow::MainWindow() : QMainWindow(){
 void MainWindow::handleTimer(){
 	// move all enemies
 	for(unsigned int i = 0; i < enemies.size(); i++){
+		// check the player bullets with the enemy
+		for(unsigned int j = 0; j < pbullets.size(); j++){
+			if(static_cast<Bullet*>(pbullets[j])->isCollides(enemies[i])){
+				enemies[i]->gotHit(static_cast<Bullet*>(pbullets[j])->getAttack());
+			}
+		}
 		enemies[i]->move();
 		enemies[i]->action();
 	}
-	// move all bullets
-	for(unsigned int i = 0; i < bullets.size(); i++){
-		bullets[i]->move();
-		bullets[i]->action();
+	
+			
+
+		
+	// move and check enemy bullets
+	std::deque<int> obullets;
+	for(unsigned int i = 0; i < ebullets.size(); i++){
+		ebullets[i]->action();
+		if(ebullets[i]->isValid()){
+			ebullets[i]->move();
+		}
+		else{
+			obullets.push_front(i);
+		}
 	}
+		
+	for(int i = obullets.size() - 1; i >= 0; i--){
+		delete ebullets[obullets[i]];
+		ebullets.erase(ebullets.begin() + obullets[i]);
+	}
+	
+	// now move and check player bullets
+	
+	std::deque<int> oobullets;
+	for(unsigned int i = 0; i < pbullets.size(); i++){
+		pbullets[i]->action();
+		if(pbullets[i]->isValid()){
+			pbullets[i]->move();
+		}
+		else{
+			oobullets.push_front(i);
+		}
+	}
+		
+	for(int i = oobullets.size() - 1; i >= 0; i--){
+		delete pbullets[oobullets[i]];
+		pbullets.erase(pbullets.begin() + oobullets[i]);
+	}
+	
+	// check the enemy bullets with the player
+	for(unsigned int i = 0; i < ebullets.size(); i++){
+		if(static_cast<Bullet*>(ebullets[i])->isCollides(human)){
+			human->gotHit(static_cast<Bullet*>(ebullets[i])->getAttack());
+		}
+	}
+	
+	// update player HP
+	int temp = 100 * human->getHP() / maxhp;
+	std::stringstream ss;
+	ss << "HP: " << temp << "%";
+	QString qstr = QString::fromStdString(ss.str());
+	hpL->setText(qstr);
+	
+	
 	// do the queued player things
 	if(pvx || pvy){
 		human->move(pvx,pvy);
@@ -90,22 +164,31 @@ void MainWindow::handleTimer(){
 //**** BULLETS BULLETS *******
 //****************************
 
-void MainWindow::makeBullet(int x, int y, bool up, int attack2){
-	Thing* addMe = new Bullet(bulletpic,x,y,up,attack);
+void MainWindow::makeGreenBullet(int x, int y){
+	Thing* addMe = new Bullet(gbullet,x,y,false,attack);
 	gameScene->addItem(addMe);
-  bullets.push_back(addMe);
+  ebullets.push_back(addMe);
+	Thing* addMe2 = new Bullet(gbullet,x+2,y-10,false,attack);
+	gameScene->addItem(addMe2);
+  ebullets.push_back(addMe2);
 }
 
-void MainWindow::makeBigBullet(int x, int y, int attack2){
-	Thing* addMe = new Bullet(widebulletpic,x,y,false,attack);
+void MainWindow::makeBlueBullet(int x, int y){
+	Thing* addMe = new Bullet(bbullet,x,y,false,attack);
 	gameScene->addItem(addMe);
-  bullets.push_back(addMe);
+  ebullets.push_back(addMe);
+}
+
+void MainWindow::makeBigBullet(int x, int y){
+	Thing* addMe = new Bullet(widebulletpic,x,y,false,attack * 2);
+	gameScene->addItem(addMe);
+  ebullets.push_back(addMe);
 }
 
 void MainWindow::makePlayerBullet(int x, int y){
-	Thing* addMe = new Bullet(bulletpic,x,y,true,attack);
+	Thing* addMe = new Bullet(pbullet,x,y,true,attack);
 	gameScene->addItem(addMe);
-  bullets.push_back(addMe);
+  pbullets.push_back(addMe);
 }
 
 //****************************
