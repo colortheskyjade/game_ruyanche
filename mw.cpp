@@ -69,6 +69,7 @@ MainWindow::MainWindow() : QMainWindow(){
   // Connecting the timer to many things
   connect(timer, SIGNAL(timeout()), this, SLOT(handleTimer()));
   connect(timer2, SIGNAL(timeout()), this, SLOT(nextLevel()));
+  connect(startB, SIGNAL(clicked()), this, SLOT(startGame()));
   
   // Make the labels
   hpL = new QLabel("HP: 100%");
@@ -256,12 +257,13 @@ void MainWindow::shootP(){
 //*** GAME STATE CHANGE ******
 //****************************
 
-void MainWindow::startGame(std::string name){
+void MainWindow::startGame(){
 	level = 0;
   human = new Player(apl,300,500,this);
   gameScene->addItem(human);
   
   endLevel();
+  startB->hide();
 }
 
 void MainWindow::nextLevel(){

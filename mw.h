@@ -50,7 +50,6 @@ class MainWindow : public QMainWindow{
 		// Game States
 		void newLevel(int);
 		void endLevel();
-		void startGame(std::string);
 		void endGame();
 		void pauseGame();
 		void resumeGame();
@@ -73,6 +72,7 @@ class MainWindow : public QMainWindow{
 	public slots:
 		void handleTimer();
 		void nextLevel();
+		void startGame();
 	
 	private:
 		QTimer * timer, *timer2;
