@@ -80,8 +80,15 @@ class MainWindow : public QMainWindow{
 		QGraphicsView *gameView;
 		QPixmap *ab1, *ab2, *ag1, *ag2, *apl, *ap, *ar1, *ar2, *ar3, *pbullet, *bbullet, *gbullet, *widebulletpic, *heartpic;
 		QLabel * hpL;
+		QPushButton *startB, *restartB, *endB, *resumeB;
+		QTextEdit* nameB;
 		int gameSpeed, attack, ecount, level, pauseMe;
 		bool paused, hasRed;
+		
+		
+  	QGraphicsView* mainView; 	QVBoxLayout* layout;
+  	QGraphicsScene* mainScene;
+  	QWidget* holder;
 		
 		std::vector<Thing*> enemies;
 		std::vector<Thing*> ebullets;

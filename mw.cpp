@@ -9,6 +9,7 @@ MainWindow::MainWindow() : QMainWindow(){
 	maxhp = 10;
 	level = 1;
 	pauseMe = 0;
+	human = NULL;
 	
 	// Master Timer
 	timer = new QTimer;
@@ -51,7 +52,21 @@ MainWindow::MainWindow() : QMainWindow(){
  	gameView->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
   gameView->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
   
-  //	Connecting the timer to many things
+  // Making buttons
+  // Playas love buttons
+  // Ohhhh yeahhhhhh
+  
+  startB = new QPushButton("&Start");
+  startB->setGeometry(160, 250, 100, 60);
+  startB->setStyleSheet("background-color:rgba(0,0,0,0); color:#ffffff; font-size:36px;");
+  gameScene->addWidget(startB);
+  
+  nameB = new QTextEdit;
+  nameB->setFixedHeight(28);
+//  nameB->setGeometry(180, 250, 60, 40);
+  nameB->setStyleSheet("background-color:rgb(0,0,0); color:#ffffff;");
+  
+  // Connecting the timer to many things
   connect(timer, SIGNAL(timeout()), this, SLOT(handleTimer()));
   connect(timer2, SIGNAL(timeout()), this, SLOT(nextLevel()));
   
@@ -61,11 +76,16 @@ MainWindow::MainWindow() : QMainWindow(){
   hpL->setStyleSheet("background-color:rgba(0,0,0,0); color:#ffffff;");
   gameScene->addWidget(hpL);
   
-  // I made the human player here
-  human = new Player(apl,300,500,this);
-  gameScene->addItem(human);
-  
-  newLevel(level);
+  holder = new QWidget;
+  mainScene = new QGraphicsScene;
+	layout = new QVBoxLayout(holder);
+	layout->addWidget(nameB);
+	layout->addWidget(gameView);
+  mainScene->addWidget(holder);
+	mainView = new QGraphicsView(mainScene);
+  mainView->setFixedSize(430,655);
+ 	mainView->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+  mainView->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 }
 
 //****************************
@@ -237,6 +257,11 @@ void MainWindow::shootP(){
 //****************************
 
 void MainWindow::startGame(std::string name){
+	level = 0;
+  human = new Player(apl,300,500,this);
+  gameScene->addItem(human);
+  
+  endLevel();
 }
 
 void MainWindow::nextLevel(){
@@ -253,6 +278,7 @@ void MainWindow::nextLevel(){
 void MainWindow::newLevel(int l){
 	ecount = 0;
 	gameSpeed = gameSpeed * 2 / 3 + 1;
+	if(l == 1){gameSpeed = 15;}
 	timer->setInterval(gameSpeed);
 	human->setInvincible();
 	timer->start();
@@ -276,6 +302,21 @@ void MainWindow::endLevel(){
 }
 
 void MainWindow::endGame(){
+	while(!ebullets.empty()){
+		delete ebullets[0];
+		ebullets.erase(ebullets.begin());
+	}
+	while(!pbullets.empty()){
+		delete pbullets[0];
+		pbullets.erase(pbullets.begin());
+	}
+	while(!enemies.empty()){
+		delete enemies[0];
+		enemies.erase(enemies.begin());
+	}
+	timer->stop();
+	delete human;
+	human = NULL;
 }
 
 bool MainWindow::isPaused(){
@@ -293,6 +334,5 @@ void MainWindow::resumeGame(){
 }
 
 void MainWindow::show(){
-	gameView->show();
-	timer->start();
+	mainView->show();
 }
