@@ -84,7 +84,10 @@ MainWindow::MainWindow() : QMainWindow(){
 //****************************
 
 void MainWindow::handleTimer(){
-	// move all enemies
+	
+
+	// all enemies movement, actions, collisions
+	std::deque<int> oenemies;
 	for(unsigned int i = 0; i < enemies.size(); i++){
 		// check the player bullets with the enemy
 		for(unsigned int j = 0; j < pbullets.size(); j++){
@@ -92,13 +95,20 @@ void MainWindow::handleTimer(){
 				enemies[i]->gotHit(static_cast<Bullet*>(pbullets[j])->getAttack());
 			}
 		}
-		enemies[i]->move();
-		enemies[i]->action();
+		if(enemies[i]->isValid()){
+			enemies[i]->move();
+			enemies[i]->action();
+		}
+		else{
+			oenemies.push_front(i);
+		}
 	}
 	
-			
-
-		
+	for(int i = oenemies.size() - 1; i >= 0; i--){
+		delete enemies[oenemies[i]];
+		enemies.erase(enemies.begin() + oenemies[i]);
+	}
+	
 	// move and check enemy bullets
 	std::deque<int> obullets;
 	for(unsigned int i = 0; i < ebullets.size(); i++){

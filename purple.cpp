@@ -54,4 +54,9 @@ void Purple::move(){
 
 void Purple::action(){
 	count++;
+	
+	// check valid
+	if(hp <= 0){
+		valid = false;
+	}
 }

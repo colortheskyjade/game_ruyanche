@@ -18,6 +18,12 @@ Player::~Player(){
 void Player::move(int vx, int vy){
 	x += vx;
 	y += vy;
+	if(y >= 570){
+		y = 570;
+	}
+	else if(y <= 450){
+		y = 450;
+	}
 	setPos(x, y);
 }
 

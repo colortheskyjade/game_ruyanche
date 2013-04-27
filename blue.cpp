@@ -57,6 +57,7 @@ void Blue::move(){
 }
 
 void Blue::action(){
+	// random shooting
 	if(count == 15){
 		if(!(rand()%15)){
 			m->makeBlueBullet(x+14,y+25);
@@ -65,5 +66,10 @@ void Blue::action(){
 	}
 	else{
 		count++;
+	}
+	
+	// check valid
+	if(hp <= 0){
+		valid = false;
 	}
 }

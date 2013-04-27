@@ -16,7 +16,6 @@ Green::Green(QPixmap* p, QPixmap* p2_, int x, int y, MainWindow* mw) : Thing(p, 
 		vx = 0;
 		vy = 1;
 		ccw = true;
-		std::cout << "ME" << std::endl;
 	}
 	
 	// set boundaries
@@ -126,5 +125,10 @@ void Green::action(){
 	}
 	else{
 		count++;
+	}
+	
+	// check valid
+	if(hp <= 0){
+		valid = false;
 	}
 }

@@ -66,4 +66,9 @@ void Red::action(){
 	else{
 		count++;
 	}
+	
+	// check valid
+	if(hp <= 0){
+		valid = false;
+	}
 }
