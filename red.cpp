@@ -16,8 +16,8 @@ Red::Red(QPixmap* p, QPixmap* p2_, QPixmap* p3_, int x, int y, MainWindow* mw, P
 	count = 0;
 	
 	// set boundaries
-	minX = 25;
-	maxX = 375;
+	minX = 10;
+	maxX = 390;
 }
 
 Red::~Red(){
@@ -59,7 +59,7 @@ void Red::move(){
 void Red::action(){
 	if(count == 20){
 		if(!(rand()%15)){
-			m->makeBigBullet(x+14,y+25);
+			m->makeBigBullet(x+15,y+30);
 		}
 		count = 0;
 	}

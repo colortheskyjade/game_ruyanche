@@ -12,15 +12,13 @@ Purple::Purple(QPixmap* p, int x, int y, MainWindow* mw, Player* pl) : Thing(p, 
 	count = 0;
 	
 	// set boundaries
-	int temp = rand() % 150;
-	minX = x - temp;
-	maxX = x + 150 - temp;
-	
-	if(minX < 0){
-		minX = 0;
+	if(x <= 160){
+		minX = 10;
+		maxX =  160;
 	}
-	if(maxX > 400){
-		maxX = 400;
+	else{
+		minX = 210;
+		maxX = 390;
 	}
 }
 

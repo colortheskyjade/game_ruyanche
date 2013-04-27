@@ -3,7 +3,7 @@
 #include <cmath>
 #include <iostream>
 
-Blue::Blue(QPixmap* p, QPixmap* p2_, int x, int y, MainWindow* mw) : Thing(p, x, y, 25, 25){
+Blue::Blue(QPixmap* p, QPixmap* p2_, int x, int y, MainWindow* mw) : Thing(p, x, y, 30, 30){
 	hp = 2;
 	valid = true;
 	p1 = p;
@@ -16,13 +16,13 @@ Blue::Blue(QPixmap* p, QPixmap* p2_, int x, int y, MainWindow* mw) : Thing(p, x,
 	count = 0;
 	
 	// set boundaries
-	if(x < 176){
+	if(x <= 160){
 		minX = 10;
-		maxX =  175;
+		maxX =  160;
 	}
 	else{
-		minX = 205;
-		maxX = 400;
+		minX = 210;
+		maxX = 390;
 	}
 	
 }
@@ -59,8 +59,8 @@ void Blue::move(){
 void Blue::action(){
 	// random shooting
 	if(count == 15){
-		if(!(rand()%15)){
-			m->makeBlueBullet(x+14,y+25);
+		if(!(rand()%10)){
+			m->makeBlueBullet(x+15,y+30);
 		}
 		count = 0;
 	}

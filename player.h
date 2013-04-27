@@ -19,19 +19,16 @@ class Player : public QGraphicsPixmapItem {
 		bool isInvincible();
 		void doAttack();
 		void setHP(int);
+		void setInvincible();
 		
 		int getHP();
 		int getX();
 		int getY();
 		
 	protected:
-		int x;
-		int y;
-		int h;
-		int w;
+		int x, y, h , w, anim, hp;
 		QPixmap *p;
-		int hp;
-		bool invincible;
+		bool invincible, godly;
 		MainWindow *m;
 };
 

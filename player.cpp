@@ -10,6 +10,8 @@ Player::Player(QPixmap *pm, int nx, int ny, MainWindow * mw) : QGraphicsPixmapIt
 	setPos(x, y);
 	m = mw;
 	hp = 10;
+	anim = 0;
+	godly = false;
 }
 
 Player::~Player(){
@@ -32,6 +34,19 @@ void Player::doAttack(){
 }
 
 void Player::action(){
+	if(invincible && !godly){
+		if(!(anim % 30)){
+			setVisible(false);
+		}
+		else if(anim % 30 == 14){
+			setVisible(true);
+		}
+		anim++;
+		if(anim == 149){
+			setVisible(true);
+			invincible = false;
+		}
+	}
 }
 
 bool Player::isDead(){
@@ -39,11 +54,17 @@ bool Player::isDead(){
 }
 
 void Player::gotHit(int attack){
+	if(!invincible){
 		hp -= attack;
+	}
 }
 
 bool Player::isInvincible(){
 	return invincible;
+}
+
+void Player::setInvincible(){
+	invincible = true;
 }
 
 int Player::getHP(){

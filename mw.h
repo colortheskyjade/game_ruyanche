@@ -48,6 +48,10 @@ class MainWindow : public QMainWindow{
 		void show();
 		
 		// Game States
+		void newLevel(int);
+		void endLevel();
+		void startGame(std::string);
+		void endGame();
 		void pauseGame();
 		void resumeGame();
 		bool isPaused();
@@ -75,8 +79,8 @@ class MainWindow : public QMainWindow{
 		QGraphicsView *gameView;
 		QPixmap *ab1, *ab2, *ag1, *ag2, *apl, *ap, *ar1, *ar2, *ar3, *pbullet, *bbullet, *gbullet, *widebulletpic, *heartpic;
 		QLabel * hpL;
-		int gameSpeed, attack;
-		bool paused;
+		int gameSpeed, attack, ecount;
+		bool paused, hasRed;
 		
 		std::vector<Thing*> enemies;
 		std::vector<Thing*> ebullets;

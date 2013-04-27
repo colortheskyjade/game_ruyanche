@@ -117,9 +117,9 @@ void Green::move(){
 }
 
 void Green::action(){
-	if(count == 15){
+	if(count == 10){
 		if(!(rand()%20)){
-			m->makeGreenBullet(x+13,y+35);
+			m->makeGreenBullet(x+14,y+35);
 		}
 		count = 0;
 	}

@@ -10,7 +10,7 @@ MainWindow::MainWindow() : QMainWindow(){
 	
 	// Master Timer
 	timer = new QTimer;
-	gameSpeed = 15;
+	gameSpeed = 14;
 	timer->setInterval(gameSpeed);
 	srand(time(0));
 	
@@ -42,6 +42,8 @@ MainWindow::MainWindow() : QMainWindow(){
   gameScene->setBackgroundBrush(bg);
   gameScene->setSceneRect(0,0,425,600);
   gameView->setFixedSize(430,605);
+ 	gameView->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+  gameView->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
   
   //	Connecting the timer to many things
   connect(timer, SIGNAL(timeout()), this, SLOT(handleTimer()));
@@ -57,26 +59,23 @@ MainWindow::MainWindow() : QMainWindow(){
   gameScene->addItem(human);
   
   //This is me testing
-  Thing* test1 = new Red(ar1, ar2, ar3, 30, 25, this);
-  enemies.push_back(test1);
-  gameScene->addItem(test1);
+//  Thing* test1 = new Red(ar1, ar2, ar3, 30, 25, this);
+//  enemies.push_back(test1);
+//  gameScene->addItem(test1);
 
-  Thing* test2 = new Green(ag1, ag2, 50, 100, this);
-  enemies.push_back(test2);
-  gameScene->addItem(test2);
+//  Thing* test2 = new Green(ag1, ag2, 50, 100, this);
+//  enemies.push_back(test2);
+//  gameScene->addItem(test2);
+//  
+//  Thing* test3 = new Blue(ab1, ab2, 50, 177, this);
+//  enemies.push_back(test3);
+//  gameScene->addItem(test3);
+//  
+//  Thing* test4 = new Purple(ap, 50, 400, this);
+//  enemies.push_back(test4);
+//  gameScene->addItem(test4);
   
-  Thing* test3 = new Blue(ab1, ab2, 50, 177, this);
-  enemies.push_back(test3);
-  gameScene->addItem(test3);
-  
-  Thing* test4 = new Purple(ap, 50, 400, this);
-  enemies.push_back(test4);
-  gameScene->addItem(test4);
-  
-	//Set the focus
-	setFocus();
-//	setCentralWidget(gameView);
-
+  newLevel(1);
 }
 
 //****************************
@@ -84,6 +83,25 @@ MainWindow::MainWindow() : QMainWindow(){
 //****************************
 
 void MainWindow::handleTimer(){
+	if(ecount < 17){
+		int select = rand() % 6;
+		Thing * addMe;
+		
+		if(select < 3){
+			addMe =  new Blue(ab1, ab2, rand() % 280 + 10, rand() % 250 + 50, this);
+		}
+		else if(select < 5){
+			addMe =  new Green(ag1, ag2, rand() % 280 + 10, rand() % 250 + 50, this);
+		}
+		else{
+			addMe =  new Purple(ap, rand() % 280 + 10, 350, this);
+		}
+		
+		enemies.push_back(addMe);
+		gameScene->addItem(addMe);
+		
+		ecount++;
+	}
 	
 
 	// all enemies movement, actions, collisions
@@ -158,6 +176,7 @@ void MainWindow::handleTimer(){
 	QString qstr = QString::fromStdString(ss.str());
 	hpL->setText(qstr);
 	
+	human->action();
 	
 	// do the queued player things
 	if(pvx || pvy){
@@ -217,6 +236,36 @@ void MainWindow::shootP(){
 //****************************
 //*** GAME STATE CHANGE ******
 //****************************
+
+void MainWindow::startGame(std::string name){
+}
+
+void MainWindow::newLevel(int l){
+
+	ecount = 0;
+	gameSpeed = gameSpeed / l + 1;
+	timer->setInterval(gameSpeed);
+	human->setInvincible();
+}
+
+void MainWindow::endLevel(){
+	while(!ebullets.empty()){
+		delete ebullets[0];
+		ebullets.erase(ebullets.begin());
+	}
+	while(!pbullets.empty()){
+		delete pbullets[0];
+		pbullets.erase(pbullets.begin());
+	}
+	while(!enemies.empty()){
+		delete enemies[0];
+		enemies.erase(enemies.begin());
+	}
+	timer->stop();
+}
+
+void MainWindow::endGame(){
+}
 
 bool MainWindow::isPaused(){
 	return paused;
