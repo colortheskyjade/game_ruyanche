@@ -34,16 +34,16 @@ void Purple::move(){
 		if(!(count % 5)){
 			x += vx;
 		
-			if(x < minX){vx = vx * -1; x += vx;}
-			else if(x > maxX){vx = vx * -1; x += vx;}
+			if(x < minX){vx = vx * -1; x = minX;}
+			else if(x > maxX){vx = vx * -1; x = maxX;}
 		
 			setX(x);
 		}
 	}
 	else if(state == 1){
 		if(vx){vx = 0;}
-		if(!vy){vy = 3;}
-		if(!(count % 5)){
+		if(!vy){vy = 2;}
+		if(!(count % 1)){
 			y += vy;
 			setY(y);
 		}
@@ -55,6 +55,9 @@ void Purple::action(){
 	
 	// check valid
 	if(hp <= 0){
+		state = 1;
+	}
+	if(y > 600){
 		valid = false;
 	}
 }

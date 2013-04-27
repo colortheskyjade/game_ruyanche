@@ -10,7 +10,7 @@ class Player;
 
 class Purple : public Thing{
 	public:
-		Purple(QPixmap* p, int x, int y, MainWindow* mw, Player* pl = 0);
+		Purple(QPixmap* p, int x, int y, MainWindow* mw, Player* pl);
 		~Purple();
 		
 		void move();

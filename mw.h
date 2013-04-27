@@ -72,14 +72,15 @@ class MainWindow : public QMainWindow{
 	
 	public slots:
 		void handleTimer();
+		void nextLevel();
 	
 	private:
-		QTimer * timer;
+		QTimer * timer, *timer2;
 		QGraphicsScene *gameScene;
 		QGraphicsView *gameView;
 		QPixmap *ab1, *ab2, *ag1, *ag2, *apl, *ap, *ar1, *ar2, *ar3, *pbullet, *bbullet, *gbullet, *widebulletpic, *heartpic;
 		QLabel * hpL;
-		int gameSpeed, attack, ecount;
+		int gameSpeed, attack, ecount, level, pauseMe;
 		bool paused, hasRed;
 		
 		std::vector<Thing*> enemies;

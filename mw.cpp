@@ -7,12 +7,18 @@ MainWindow::MainWindow() : QMainWindow(){
 	pattack = false;
 	paused = false;
 	maxhp = 10;
+	level = 1;
+	pauseMe = 0;
 	
 	// Master Timer
 	timer = new QTimer;
 	gameSpeed = 14;
 	timer->setInterval(gameSpeed);
 	srand(time(0));
+	
+	// Secondary Timer
+	timer2 = new QTimer;
+	timer2->setInterval(100);
 	
 	// Load ALL THE PICTURES
 	
@@ -47,6 +53,7 @@ MainWindow::MainWindow() : QMainWindow(){
   
   //	Connecting the timer to many things
   connect(timer, SIGNAL(timeout()), this, SLOT(handleTimer()));
+  connect(timer2, SIGNAL(timeout()), this, SLOT(nextLevel()));
   
   // Make the labels
   hpL = new QLabel("HP: 100%");
@@ -58,24 +65,7 @@ MainWindow::MainWindow() : QMainWindow(){
   human = new Player(apl,300,500,this);
   gameScene->addItem(human);
   
-  //This is me testing
-//  Thing* test1 = new Red(ar1, ar2, ar3, 30, 25, this);
-//  enemies.push_back(test1);
-//  gameScene->addItem(test1);
-
-//  Thing* test2 = new Green(ag1, ag2, 50, 100, this);
-//  enemies.push_back(test2);
-//  gameScene->addItem(test2);
-//  
-//  Thing* test3 = new Blue(ab1, ab2, 50, 177, this);
-//  enemies.push_back(test3);
-//  gameScene->addItem(test3);
-//  
-//  Thing* test4 = new Purple(ap, 50, 400, this);
-//  enemies.push_back(test4);
-//  gameScene->addItem(test4);
-  
-  newLevel(1);
+  newLevel(level);
 }
 
 //****************************
@@ -83,18 +73,22 @@ MainWindow::MainWindow() : QMainWindow(){
 //****************************
 
 void MainWindow::handleTimer(){
+	if(enemies.empty() && ecount == 17){
+		endLevel();
+	}
+	
 	if(ecount < 17){
-		int select = rand() % 6;
+		int select = rand() % 7;
 		Thing * addMe;
 		
-		if(select < 3){
+		if(select < 4){
 			addMe =  new Blue(ab1, ab2, rand() % 280 + 10, rand() % 250 + 50, this);
 		}
-		else if(select < 5){
+		else if(select < 6){
 			addMe =  new Green(ag1, ag2, rand() % 280 + 10, rand() % 250 + 50, this);
 		}
 		else{
-			addMe =  new Purple(ap, rand() % 280 + 10, 350, this);
+			addMe =  new Purple(ap, rand() % 280 + 10, 350, this, human);
 		}
 		
 		enemies.push_back(addMe);
@@ -122,9 +116,10 @@ void MainWindow::handleTimer(){
 		}
 	}
 	
-	for(int i = oenemies.size() - 1; i >= 0; i--){
-		delete enemies[oenemies[i]];
-		enemies.erase(enemies.begin() + oenemies[i]);
+	while(!oenemies.empty()){
+		delete enemies[oenemies[0]];
+		enemies.erase(enemies.begin() + oenemies[0]);
+		oenemies.pop_front();
 	}
 	
 	// move and check enemy bullets
@@ -139,9 +134,10 @@ void MainWindow::handleTimer(){
 		}
 	}
 		
-	for(int i = obullets.size() - 1; i >= 0; i--){
-		delete ebullets[obullets[i]];
-		ebullets.erase(ebullets.begin() + obullets[i]);
+	while(!obullets.empty()){
+		delete ebullets[obullets[0]];
+		ebullets.erase(ebullets.begin() + obullets[0]);
+		obullets.pop_front();
 	}
 	
 	// now move and check player bullets
@@ -157,9 +153,10 @@ void MainWindow::handleTimer(){
 		}
 	}
 		
-	for(int i = oobullets.size() - 1; i >= 0; i--){
-		delete pbullets[oobullets[i]];
-		pbullets.erase(pbullets.begin() + oobullets[i]);
+	while(!oobullets.empty()){
+		delete pbullets[oobullets[0]];
+		pbullets.erase(pbullets.begin() + oobullets[0]);
+		oobullets.pop_front();
 	}
 	
 	// check the enemy bullets with the player
@@ -240,12 +237,23 @@ void MainWindow::shootP(){
 void MainWindow::startGame(std::string name){
 }
 
-void MainWindow::newLevel(int l){
+void MainWindow::nextLevel(){
+	if(pauseMe == 50){
+		timer2->stop();
+		newLevel(++level);
+		pauseMe = 0;
+	}
+	else{
+		pauseMe++;
+	}
+}
 
+void MainWindow::newLevel(int l){
 	ecount = 0;
-	gameSpeed = gameSpeed / l + 1;
+	gameSpeed = gameSpeed * 2 / 3 + 1;
 	timer->setInterval(gameSpeed);
 	human->setInvincible();
+	timer->start();
 }
 
 void MainWindow::endLevel(){
@@ -262,6 +270,7 @@ void MainWindow::endLevel(){
 		enemies.erase(enemies.begin());
 	}
 	timer->stop();
+	timer2->start();
 }
 
 void MainWindow::endGame(){

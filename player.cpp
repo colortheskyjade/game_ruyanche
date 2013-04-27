@@ -26,6 +26,12 @@ void Player::move(int vx, int vy){
 	else if(y <= 450){
 		y = 450;
 	}
+	if(x <= 0){
+		x = 0;
+	}
+	if(x >= 395){
+		x= 395;
+	}
 	setPos(x, y);
 }
 
@@ -42,9 +48,10 @@ void Player::action(){
 			setVisible(true);
 		}
 		anim++;
-		if(anim == 149){
+		if(anim == 299){
 			setVisible(true);
 			invincible = false;
+			anim = 0;
 		}
 	}
 }

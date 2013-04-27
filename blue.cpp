@@ -46,11 +46,10 @@ void Blue::move(){
 			setPixmap(*p2);
 		}
 
-		
 		x += vx;
 		
-		if(x < minX){vx = vx * -1; x += vx;}
-		else if(x > maxX){vx = vx * -1; x += vx;}
+		if(x < minX){vx = vx * -1; x = minX;}
+		else if(x > maxX){vx = vx * -1; x = maxX;}
 		
 		setX(x);
 	}
@@ -59,7 +58,7 @@ void Blue::move(){
 void Blue::action(){
 	// random shooting
 	if(count == 15){
-		if(!(rand()%10)){
+		if(!(rand()%15)){
 			m->makeBlueBullet(x+15,y+30);
 		}
 		count = 0;
