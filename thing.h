@@ -18,6 +18,8 @@ class Thing : public QGraphicsPixmapItem {
 		int getX();
 		int getY();
 		
+		bool purple;
+		
 	protected:
 		int x, y, vx, vy, h, w, hp;
 		QPixmap *pixMap;

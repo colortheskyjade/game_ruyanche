@@ -16,6 +16,7 @@ class Purple : public Thing{
 		void move();
 		void action();
 		bool isValid();
+		void isCollides();
 		
 	private:
 		int maxX, minX, count;

@@ -96,7 +96,6 @@ void MainWindow::handleTimer(){
 		
 		ecount++;
 	}
-	
 
 	// all enemies movement, actions, collisions
 	std::deque<int> oenemies;
@@ -110,6 +109,9 @@ void MainWindow::handleTimer(){
 		if(enemies[i]->isValid()){
 			enemies[i]->move();
 			enemies[i]->action();
+			if(enemies[i]->purple){
+				static_cast<Purple*>(enemies[i])->isCollides();
+			}
 		}
 		else{
 			oenemies.push_front(i);

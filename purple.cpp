@@ -25,6 +25,15 @@ Purple::Purple(QPixmap* p, int x, int y, MainWindow* mw, Player* pl) : Thing(p, 
 Purple::~Purple(){
 }
 
+void Purple::isCollides(){
+	if((human->getX() >= (x - 60)) && (human->getX() <= (x + 30))){
+		if((human->getY() >= y - 60) && (human->getY() <= (y + 30))){
+			valid = false;
+			human->gotHit(1000);
+		}
+	}
+}
+
 bool Purple::isValid(){
 	return valid;
 }
@@ -51,6 +60,7 @@ void Purple::move(){
 }
 
 void Purple::action(){
+	purple = true;
 	count++;
 	
 	// check valid

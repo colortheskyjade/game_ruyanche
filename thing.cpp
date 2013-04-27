@@ -8,6 +8,7 @@ Thing::Thing(QPixmap* p, int nx, int ny, int nh, int nw) : QGraphicsPixmapItem(*
 	h = nh;
 	w = nw;
 	setPos(x, y);
+	purple = false;
 }
 
 Thing::~Thing(){}
