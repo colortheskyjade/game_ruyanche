@@ -20,7 +20,7 @@ class Red : public Thing{
 		
 	private:
 		QPixmap *p1, *p2, *p3;
-		int maxX, minX, count, attack, state, ani;
+		int maxX, minX, count, attack, state, ani, bounce, targetX;
 		MainWindow *m;
 		Player* human;
 		bool valid;

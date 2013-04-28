@@ -37,12 +37,35 @@ MainWindow::MainWindow() : QMainWindow(){
 	bbullet = new QPixmap("images/bluebullet.png");
 	gbullet = new QPixmap("images/greenbullet.png");
 	widebulletpic = new QPixmap("images/redbullet.png");
+	heartpic = new QPixmap("images/heart.png");
+	
+	h1 = new QGraphicsPixmapItem(*heartpic);
+	h1->setPos(400, 575);
+	h1->setVisible(false);
+	h2 = new QGraphicsPixmapItem(*heartpic);
+	h2->setPos(375, 575);
+	h2->setVisible(false);
+	h3 = new QGraphicsPixmapItem(*heartpic);
+	h3->setPos(350, 575);
+	h3->setVisible(false);
+	h4 = new QGraphicsPixmapItem(*heartpic);
+	h4->setPos(325, 575);
+	h4->setVisible(false);
+	h5 = new QGraphicsPixmapItem(*heartpic);
+	h5->setPos(300, 575);
+	h5->setVisible(false);
   
 	//Initialize the Scenes and Views
   gameScene = new GScene(this);
   gameView = new QGraphicsView(gameScene);
   mainScene = new QGraphicsScene;
 	mainView = new QGraphicsView(mainScene);
+  
+	gameScene->addItem(h1);
+	gameScene->addItem(h2);
+	gameScene->addItem(h3);
+	gameScene->addItem(h4);
+	gameScene->addItem(h5);
   
   holder = new QWidget;
   holder2 = new QWidget;
@@ -63,7 +86,6 @@ MainWindow::MainWindow() : QMainWindow(){
   
   // Making buttons
   // Playas love buttons
-  // Ohhhh yeahhhhhh
   
   startB = new QPushButton("Start");
   startB->setGeometry(160, 250, 100, 60);
@@ -73,15 +95,21 @@ MainWindow::MainWindow() : QMainWindow(){
   nameB = new QTextEdit;
   nameB->setFixedHeight(28);
   nameB->setStyleSheet("background-color:rgb(0,0,0); color:#ffffff;");
-  
+   
+  restartB = new QPushButton("Restart");
+  restartB->setFixedHeight(28);
   pauseB = new QPushButton("Pause");
   pauseB->setFixedHeight(28);
-//  pauseB->setStyleSheet("background-color:rgba(0,0,0,1); color:#ffffff;");
-  
+  endB = new QPushButton("Quit");
+  endB->setFixedHeight(28);
+
   // Connecting the timer to many things
   connect(timer, SIGNAL(timeout()), this, SLOT(handleTimer()));
   connect(timer2, SIGNAL(timeout()), this, SLOT(nextLevel()));
   connect(startB, SIGNAL(clicked()), this, SLOT(startGame()));
+  connect(pauseB, SIGNAL(clicked()), this, SLOT(pauseGame()));
+  connect(endB, SIGNAL(clicked()), this , SLOT(quitGame()));
+  connect(restartB, SIGNAL(clicked()), this , SLOT(restartGame()));
   
   // Make the labels  
   nameL = new QTextEdit;
@@ -110,12 +138,26 @@ MainWindow::MainWindow() : QMainWindow(){
   errorL->setGeometry(QRect(60,520,380,80));
   gameScene->addWidget(errorL);
   
+  nextWave = new QLabel("Get ready for the next wave!");
+  nextWave->setStyleSheet("background-color:rgba(0,0,0,1); color:#ffffff; font-size:24px;");
+  nextWave->setGeometry(QRect(55,220,380,80));
+  nextWave->hide();
+  gameScene->addWidget(nextWave);
+  
+  endScore = new QLabel;
+  endScore->setStyleSheet("background-color:rgba(0,0,0,1); color:#ffffff; font-size:26px;");
+  endScore->setGeometry(QRect(0,150,425,80));
+  endScore->setAlignment(Qt::AlignCenter);
+  endScore->hide();
+  gameScene->addWidget(endScore);
   
   // Set the layouts
-  layout2->addWidget(nameB);
+  layout2->addWidget(restartB);
   layout2->addWidget(pauseB);
+  layout2->addWidget(endB);
+  layout->addWidget(holder2);
 	layout->addWidget(gameView);
-	layout->addWidget(holder2);
+	layout->addWidget(nameB);
 	holder3->setVisible(false);
 	layout->addWidget(holder3);
 	layout->setContentsMargins(0, 0, 0, 0);
@@ -134,15 +176,32 @@ MainWindow::MainWindow() : QMainWindow(){
   gameView->setAttribute(Qt::WA_NoSystemBackground);
  	mainView->setAttribute(Qt::WA_OpaquePaintEvent);
   mainView->setAttribute(Qt::WA_NoSystemBackground);
-//  mainView->setViewportUpdateMode(QGraphicsView::FullViewportUpdate);
-//  gameView->setViewportUpdateMode(QGraphicsView::FullViewportUpdate);
+  mainView->setViewportUpdateMode(QGraphicsView::FullViewportUpdate);
+  gameView->setViewportUpdateMode(QGraphicsView::FullViewportUpdate);
 }
 
 //****************************
 //****** SLOTS SLOTS *********
 //****************************
 
-void MainWindow::handleTimer(){
+void MainWindow::handleTimer(){	
+
+	// if player is dead
+	if(!human->isDead()){
+		endGame();
+		return;
+	}
+	
+	// randomly add mothership
+	if(!(rand() % 300) && !hasRed){
+		Thing* addMe = new Red(ar1, ar2, ar3, 10, 15, this, human);
+		enemies.push_back(addMe);
+		gameScene->addItem(addMe);
+		hasRed = true;
+	}
+
+	// add enemies
+
 	if(enemies.empty() && ecount == 17){
 		endLevel();
 	}
@@ -246,7 +305,45 @@ void MainWindow::handleTimer(){
 	QString qstr = QString::fromStdString(ss.str());
 	hpL->setText(qstr);
 	
+	// heart display
 	human->action();
+	int getLives = human->getLives();
+	if(getLives > 4){
+		h5->setVisible(true);
+	}
+	else{
+		h5->setVisible(false);
+	}
+	if(getLives > 3){
+		h4->setVisible(true);
+	}
+	else{
+		h4->setVisible(false);
+	}
+	if(getLives > 2){
+		h3->setVisible(true);
+	}
+	else{
+		h3->setVisible(false);
+	}
+	if(getLives > 1){
+		h2->setVisible(true);
+	}
+	else{
+		h2->setVisible(false);
+	}
+	if(getLives > 0){
+		h1->setVisible(true);
+	}
+	else{
+		h1->setVisible(false);
+	}
+	
+	// handle lives
+	if(human->getHP() <= 0){
+		human->setHP(maxhp);
+		human->setInvincible();
+	}
 	
 	// do the queued player things
 	if(pvx || pvy){
@@ -314,7 +411,9 @@ void MainWindow::shootP(){
 //****************************
 
 void MainWindow::startGame(){
+	hasRed = false;
 	errorL->hide();
+	endScore->hide();
 	if(nameB->toPlainText().isEmpty()){
 		// display the warning label
 		errorL->setText("You must enter a name in the\nbox below to start the game!");
@@ -322,9 +421,10 @@ void MainWindow::startGame(){
 		return;
 	}
 	
+	pName = nameB->toPlainText().toUtf8().constData();
 	playerName = "Pilot: " + nameB->toPlainText();
 	nameL->setText(playerName);
-	holder2->setVisible(false);
+	nameB->setVisible(false);
 	holder3->setVisible(true);
 	scoreL->setText("Score: 0");
 	score = 0;
@@ -338,8 +438,9 @@ void MainWindow::startGame(){
 }
 
 void MainWindow::nextLevel(){
-	if(pauseMe == 50){
+	if(pauseMe == 20){
 		timer2->stop();
+		nextWave->hide();
 		newLevel(++level);
 		pauseMe = 0;
 	}
@@ -349,10 +450,12 @@ void MainWindow::nextLevel(){
 }
 
 void MainWindow::newLevel(int l){
+	hasRed = false;
 	ecount = 0;
 	gameSpeed = gameSpeed * 3 / 5 + 1;
+	attack += 1;
 	maxhp += 5;
-	if(l == 1){gameSpeed = 15; maxhp = 10;}
+	if(l == 1){gameSpeed = 15; maxhp = 10; attack = 1;}
 	timer->setInterval(gameSpeed);
 	human->setInvincible();
 	timer->start();
@@ -372,6 +475,7 @@ void MainWindow::endLevel(){
 		enemies.erase(enemies.begin());
 	}
 	timer->stop();
+	nextWave->show();
 	timer2->start();
 }
 
@@ -391,6 +495,16 @@ void MainWindow::endGame(){
 	timer->stop();
 	delete human;
 	human = NULL;
+	nameB->setVisible(true);
+	holder3->setVisible(false);
+	
+	std::stringstream ss2;
+	ss2 << "Score for " << pName << ": " << score;
+	QString qstr2 =  QString::fromStdString(ss2.str());
+	endScore->setText(qstr2);
+	endScore->show();
+	
+	startB->show();
 }
 
 bool MainWindow::isPaused(){
@@ -398,6 +512,10 @@ bool MainWindow::isPaused(){
 }
 
 void MainWindow::pauseGame(){
+	if(paused){
+		resumeGame();
+		return;
+	}
 	timer->stop();
 	paused = true;
 }

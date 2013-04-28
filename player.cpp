@@ -1,6 +1,7 @@
 #include "player.h"
 
 Player::Player(QPixmap *pm, int nx, int ny, MainWindow * mw) : QGraphicsPixmapItem(*pm){
+	lives = 3;
 	p = pm;
 	setPixmap(*p);
 	x = nx;
@@ -54,14 +55,18 @@ void Player::action(){
 			anim = 0;
 		}
 	}
+	
+ 	if(hp <= 0){
+ 		lives--;
+ 	}
 }
 
 bool Player::isDead(){
-	return (hp <= 0);
+	return static_cast<bool>(lives);
 }
 
 void Player::gotHit(int attack){
-	if(!invincible){
+	if(!invincible && !godly){
 		hp -= attack;
 	}
 }

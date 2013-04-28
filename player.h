@@ -21,12 +21,15 @@ class Player : public QGraphicsPixmapItem {
 		void setHP(int);
 		void setInvincible();
 		
+		int getLives(){return lives;}
+		void addLife(){lives++;}
+		
 		int getHP();
 		int getX();
 		int getY();
 		
 	protected:
-		int x, y, h , w, anim, hp;
+		int x, y, h , w, anim, hp, lives;
 		QPixmap *p;
 		bool invincible, godly;
 		MainWindow *m;

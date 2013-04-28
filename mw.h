@@ -51,7 +51,6 @@ class MainWindow : public QMainWindow{
 		void newLevel(int);
 		void endLevel();
 		void endGame();
-		void pauseGame();
 		void resumeGame();
 		bool isPaused();
 		
@@ -60,6 +59,7 @@ class MainWindow : public QMainWindow{
 		void makeGreenBullet(int x, int y);
 		void makeBigBullet(int x, int y);
 		void makePlayerBullet(int x, int y);
+		void fireBeam(int, int);
 		
 		// Make beam
 		
@@ -73,6 +73,9 @@ class MainWindow : public QMainWindow{
 		void handleTimer();
 		void nextLevel();
 		void startGame();
+		void pauseGame();
+		void restartGame(){endGame(); startGame();}
+		void quitGame(){QApplication::quit();}
 	
 	private:
 		QTimer * timer, *timer2;
@@ -80,16 +83,18 @@ class MainWindow : public QMainWindow{
 		QGraphicsView *gameView, *mainView;
 		QPixmap *ab1, *ab2, *ag1, *ag2, *apl, *ap, *ar1, *ar2, *ar3, *pbullet, *bbullet, *gbullet, *widebulletpic, *heartpic;
 		QTextEdit *hpL, *nameL, *scoreL;
-		QLabel *errorL;
+		QLabel *errorL, *nextWave, *endScore;
 		QPushButton *startB, *restartB, *endB, *resumeB, *pauseB;
 		QTextEdit* nameB;
 		int gameSpeed, attack, ecount, level, pauseMe, score;
 		bool paused, hasRed;
+		QGraphicsPixmapItem *h1,*h2,*h3,*h4,*h5;
 		
 		QVBoxLayout *layout;
 		QHBoxLayout *layout2, *layout3;
   	QWidget *holder, *holder2, *holder3;
 		
+		std::string pName;
 		QString playerName;
 		
 		std::vector<Thing*> enemies;
