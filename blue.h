@@ -15,6 +15,7 @@ class Blue : public Thing{
 		void move();
 		void action();
 		bool isValid();
+		int getScore(){return 100;}
 		
 	private:
 		int maxX, minX, count, attack, anim;

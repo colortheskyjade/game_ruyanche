@@ -76,19 +76,21 @@ class MainWindow : public QMainWindow{
 	
 	private:
 		QTimer * timer, *timer2;
-		QGraphicsScene *gameScene;
-		QGraphicsView *gameView;
+		QGraphicsScene *gameScene, *mainScene;
+		QGraphicsView *gameView, *mainView;
 		QPixmap *ab1, *ab2, *ag1, *ag2, *apl, *ap, *ar1, *ar2, *ar3, *pbullet, *bbullet, *gbullet, *widebulletpic, *heartpic;
-		QLabel * hpL;
-		QPushButton *startB, *restartB, *endB, *resumeB;
+		QTextEdit *hpL, *nameL, *scoreL;
+		QLabel *errorL;
+		QPushButton *startB, *restartB, *endB, *resumeB, *pauseB;
 		QTextEdit* nameB;
-		int gameSpeed, attack, ecount, level, pauseMe;
+		int gameSpeed, attack, ecount, level, pauseMe, score;
 		bool paused, hasRed;
 		
+		QVBoxLayout *layout;
+		QHBoxLayout *layout2, *layout3;
+  	QWidget *holder, *holder2, *holder3;
 		
-  	QGraphicsView* mainView; 	QVBoxLayout* layout;
-  	QGraphicsScene* mainScene;
-  	QWidget* holder;
+		QString playerName;
 		
 		std::vector<Thing*> enemies;
 		std::vector<Thing*> ebullets;

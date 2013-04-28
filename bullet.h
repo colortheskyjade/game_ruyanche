@@ -20,9 +20,10 @@ class Bullet : public Thing{
 		bool isCollides(Player*);
 		bool isCollides(Thing*);
 		int getAttack();
+		int getScore(){if(heart) return 500; return 0;}
 		
 	private:
-		bool up, red, valid;
+		bool up, red, valid, heart;
 		int attack;
 };
 

@@ -1,6 +1,6 @@
 #include "green.h"
 
-Green::Green(QPixmap* p, QPixmap* p2_, int x, int y, MainWindow* mw) : Thing(p, x, y, 25, 25){
+Green::Green(QPixmap* p, QPixmap* p2_, int x, int y, MainWindow* mw) : Thing(p2_, x, y, 25, 25){
 	hp = 6;
 	valid = true;
 	p1 = p;
@@ -45,17 +45,16 @@ bool Green::isValid(){
 		
 void Green::move(){
 	if(!(count % 5)){
-		if(anim < 5){
-			setPixmap(*p1);
-			anim++;
-		}
-		else {
-			anim++;
-			anim = anim % 10;
-			setPixmap(*p2);
-		}
+//		if(anim < 5){
+//			setPixmap(*p1);
+//			anim++;
+//		}
+//		else {
+//			anim++;
+//			anim = anim % 10;
+//			setPixmap(*p2);
+//		}
 
-		
 		x += vx;
 		y += vy;
 		

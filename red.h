@@ -16,6 +16,7 @@ class Red : public Thing{
 		void move();
 		void action();
 		bool isValid();
+		int getScore(){	return 1000;}
 		
 	private:
 		QPixmap *p1, *p2, *p3;

@@ -36,15 +36,14 @@ bool Blue::isValid(){
 
 void Blue::move(){
 	if(!(count % 5)){
-		if(anim < 7){
+		if(anim % 14 == 6){
 			setPixmap(*p1);
-			anim++;
 		}
-		else {
-			anim++;
-			anim = anim % 14;
+		else if(anim % 14 == 0){
+			anim = 0;
 			setPixmap(*p2);
 		}
+		anim++;
 
 		x += vx;
 		

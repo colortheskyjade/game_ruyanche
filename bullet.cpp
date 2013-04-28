@@ -1,6 +1,6 @@
 #include "bullet.h"
 
-Bullet::Bullet(QPixmap* p, int x, int y, bool up, int attack, bool red, bool heart) : Thing(p, x, y, 0 , 0), attack(attack){
+Bullet::Bullet(QPixmap* p, int x, int y, bool up, int attack, bool red, bool heart) : Thing(p, x, y, 0 , 0), heart(heart), attack(attack){
 	valid = true;
 	vx = 0;
 	if(up){
@@ -28,21 +28,17 @@ Bullet::~Bullet(){
 }
 
 bool Bullet::isCollides(Player * human){
-	if((human->getX() >= (x - 26 - w)) && (human->getX() <= (x + w))){
-		if((human->getY() >= y - 26 - h) && (human->getY() <= (y + h))){
+	if(collidesWithItem(human)){
 			valid = false;
 			return true;
-		}
 	}
 	return false;
 }
 
 bool Bullet::isCollides(Thing* ship){
-	if((ship->getX() >= (x - 26 - w)) && (ship->getX() <= (x + w))){
-		if((ship->getY() >= y - 26) && (ship->getY() <= (y))){
+	if(collidesWithItem(ship)){
 			valid = false;
 			return true;
-		}
 	}
 	return false;
 }
@@ -59,7 +55,6 @@ void Bullet::move(){
 
 void Bullet::action(){
 	// checks if it's still valid
-	
 	if(y < 0 || y > 605){
 		valid = false;
 	}

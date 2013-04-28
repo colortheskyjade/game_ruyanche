@@ -41,6 +41,15 @@ MainWindow::MainWindow() : QMainWindow(){
 	//Initialize the Scenes and Views
   gameScene = new GScene(this);
   gameView = new QGraphicsView(gameScene);
+  mainScene = new QGraphicsScene;
+	mainView = new QGraphicsView(mainScene);
+  
+  holder = new QWidget;
+  holder2 = new QWidget;
+  holder3 = new QWidget;
+	layout = new QVBoxLayout(holder);
+	layout2 = new QHBoxLayout(holder2);
+	layout3 = new QHBoxLayout(holder3);
   
   //Set the attributes to the game scene
   //Image Credit: http://universe-beauty.com/Space-art/Unsorted-space-art/stars-and-planets-photo-img87-895p.html
@@ -56,37 +65,77 @@ MainWindow::MainWindow() : QMainWindow(){
   // Playas love buttons
   // Ohhhh yeahhhhhh
   
-  startB = new QPushButton("&Start");
+  startB = new QPushButton("Start");
   startB->setGeometry(160, 250, 100, 60);
   startB->setStyleSheet("background-color:rgba(0,0,0,0); color:#ffffff; font-size:36px;");
   gameScene->addWidget(startB);
   
   nameB = new QTextEdit;
   nameB->setFixedHeight(28);
-//  nameB->setGeometry(180, 250, 60, 40);
   nameB->setStyleSheet("background-color:rgb(0,0,0); color:#ffffff;");
+  
+  pauseB = new QPushButton("Pause");
+  pauseB->setFixedHeight(28);
+//  pauseB->setStyleSheet("background-color:rgba(0,0,0,1); color:#ffffff;");
   
   // Connecting the timer to many things
   connect(timer, SIGNAL(timeout()), this, SLOT(handleTimer()));
   connect(timer2, SIGNAL(timeout()), this, SLOT(nextLevel()));
   connect(startB, SIGNAL(clicked()), this, SLOT(startGame()));
   
-  // Make the labels
-  hpL = new QLabel("HP: 100%");
-  hpL->setGeometry(QRect(355,570,100,25));
-  hpL->setStyleSheet("background-color:rgba(0,0,0,0); color:#ffffff;");
-  gameScene->addWidget(hpL);
+  // Make the labels  
+  nameL = new QTextEdit;
+  nameL->setStyleSheet("background-color:rgb(0,0,0); color:#ffffff;");
+  nameL->setFixedHeight(28);
+  nameL->setFixedWidth(200);
+  nameL->setReadOnly(true);
+  layout3->addWidget(nameL);
+    
+  scoreL = new QTextEdit;
+  scoreL->setStyleSheet("background-color:rgb(0,0,0); color:#ffffff;");
+  scoreL->setFixedHeight(28);
+  scoreL->setFixedWidth(130);
+  scoreL->setReadOnly(true);
+  layout3->addWidget(scoreL);
   
-  holder = new QWidget;
-  mainScene = new QGraphicsScene;
-	layout = new QVBoxLayout(holder);
-	layout->addWidget(nameB);
+  hpL = new QTextEdit;
+  hpL->setStyleSheet("background-color:rgb(0,0,0); color:#ffffff;");
+  hpL->setFixedHeight(28);
+  hpL->setFixedWidth(80);
+  hpL->setReadOnly(true);
+  layout3->addWidget(hpL);
+  
+  errorL = new QLabel;
+  errorL->setStyleSheet("background-color:rgba(0,0,0,1); color:#ffffff; font-size:24px;");
+  errorL->setGeometry(QRect(60,520,380,80));
+  gameScene->addWidget(errorL);
+  
+  
+  // Set the layouts
+  layout2->addWidget(nameB);
+  layout2->addWidget(pauseB);
 	layout->addWidget(gameView);
+	layout->addWidget(holder2);
+	holder3->setVisible(false);
+	layout->addWidget(holder3);
+	layout->setContentsMargins(0, 0, 0, 0);
+	layout->setMargin(0);
+	layout2->setContentsMargins(0, 0, 0, 0);
+	layout2->setMargin(0);
+	layout3->setContentsMargins(0, 0, 0, 0);
+	layout3->setMargin(0);
+	
   mainScene->addWidget(holder);
-	mainView = new QGraphicsView(mainScene);
-  mainView->setFixedSize(430,655);
+  mainView->setFixedSize(460,710);
  	mainView->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
   mainView->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+  
+  gameView->setAttribute(Qt::WA_OpaquePaintEvent);
+  gameView->setAttribute(Qt::WA_NoSystemBackground);
+ 	mainView->setAttribute(Qt::WA_OpaquePaintEvent);
+  mainView->setAttribute(Qt::WA_NoSystemBackground);
+//  mainView->setViewportUpdateMode(QGraphicsView::FullViewportUpdate);
+//  gameView->setViewportUpdateMode(QGraphicsView::FullViewportUpdate);
 }
 
 //****************************
@@ -140,6 +189,7 @@ void MainWindow::handleTimer(){
 	}
 	
 	while(!oenemies.empty()){
+		score += enemies[oenemies[0]]->getScore();
 		delete enemies[oenemies[0]];
 		enemies.erase(enemies.begin() + oenemies[0]);
 		oenemies.pop_front();
@@ -207,6 +257,12 @@ void MainWindow::handleTimer(){
 		human->doAttack();
 		pattack = false;
 	}
+	
+	// update score
+	std::stringstream ss2;
+	ss2 << "Score: " << score;
+	QString qstr2 = QString::fromStdString(ss2.str());
+	scoreL->setText(qstr2);
 }
 
 //****************************
@@ -258,6 +314,21 @@ void MainWindow::shootP(){
 //****************************
 
 void MainWindow::startGame(){
+	errorL->hide();
+	if(nameB->toPlainText().isEmpty()){
+		// display the warning label
+		errorL->setText("You must enter a name in the\nbox below to start the game!");
+		errorL->show();
+		return;
+	}
+	
+	playerName = "Pilot: " + nameB->toPlainText();
+	nameL->setText(playerName);
+	holder2->setVisible(false);
+	holder3->setVisible(true);
+	scoreL->setText("Score: 0");
+	score = 0;
+
 	level = 0;
   human = new Player(apl,300,500,this);
   gameScene->addItem(human);
@@ -279,8 +350,9 @@ void MainWindow::nextLevel(){
 
 void MainWindow::newLevel(int l){
 	ecount = 0;
-	gameSpeed = gameSpeed * 2 / 3 + 1;
-	if(l == 1){gameSpeed = 15;}
+	gameSpeed = gameSpeed * 3 / 5 + 1;
+	maxhp += 5;
+	if(l == 1){gameSpeed = 15; maxhp = 10;}
 	timer->setInterval(gameSpeed);
 	human->setInvincible();
 	timer->start();

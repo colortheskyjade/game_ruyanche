@@ -26,11 +26,9 @@ Purple::~Purple(){
 }
 
 void Purple::isCollides(){
-	if((human->getX() >= (x - 60)) && (human->getX() <= (x + 30))){
-		if((human->getY() >= y - 60) && (human->getY() <= (y + 30))){
+	if(collidesWithItem(human)){
 			valid = false;
 			human->gotHit(1000);
-		}
 	}
 }
 

@@ -14,6 +14,7 @@ class Thing : public QGraphicsPixmapItem {
 		virtual bool isValid() = 0;
 		
 		virtual void gotHit(int);
+		virtual int getScore(){return 0;}
 		
 		int getX();
 		int getY();
