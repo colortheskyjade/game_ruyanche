@@ -102,6 +102,7 @@ Notes:
 	* Levels are reached after a player kills all ships on screen. 
 	* Levels are referred to as waves in the game
 	* All waves are 17 ships each (not counting the mothership), the position and numbers of each ship are randomly generated
+	* Player is healed between levels
 * Increasing Difficulty
 	* Timer speeds up each level, making everything move faster
 	* Attacks of each ship increase each level
