@@ -62,6 +62,8 @@ MainWindow::MainWindow() : QMainWindow(){
   mainScene = new QGraphicsScene;
 	mainView = new QGraphicsView(mainScene);
   
+  mainView->setWindowTitle("Starships (were meant to fly...)");
+  
 	gameScene->addItem(h1);
 	gameScene->addItem(h2);
 	gameScene->addItem(h3);
@@ -498,6 +500,7 @@ void MainWindow::newLevel(int l){
 	maxhp += 5;
 	if(l == 1){gameSpeed = 15; maxhp = 10; attack = 1;}
 	timer->setInterval(gameSpeed);
+	human->setHP(maxhp);
 	human->setInvincible();
 	timer->start();
 }
