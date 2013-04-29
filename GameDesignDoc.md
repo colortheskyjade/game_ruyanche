@@ -87,6 +87,7 @@ A high-contrast themed shooting game based on Galaga and similar games. The play
 		* Only fired by the red ship
 		* Will stop growing on contact with the player
 	* Appearance
+		* ![Rainbow Bullet](images/rainbow.png)
 	* Note: implemented in the game as a series of bullets that are fired frequently enough that they produce a long beam. Not technically a thing, but I felt that it was necessary to document it as a separate thing.
 
 Notes:
