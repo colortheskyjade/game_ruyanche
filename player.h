@@ -20,6 +20,7 @@ class Player : public QGraphicsPixmapItem {
 		void doAttack();
 		void setHP(int);
 		void setInvincible();
+		void setGodly(){godly = true;}
 		
 		int getLives(){return lives;}
 		void addLife(){lives++;}

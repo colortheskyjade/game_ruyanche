@@ -97,7 +97,7 @@ MainWindow::MainWindow() : QMainWindow(){
   nameB->setFixedHeight(28);
   nameB->setStyleSheet("background-color:rgb(0,0,0); color:#ffffff;");
    
-  restartB = new QPushButton("Restart");
+  restartB = new QPushButton("Start");
   restartB->setFixedHeight(28);
   pauseB = new QPushButton("Pause");
   pauseB->setFixedHeight(28);
@@ -468,6 +468,10 @@ void MainWindow::startGame(){
 	level = 0;
   human = new Player(apl,300,500,this);
   gameScene->addItem(human);
+  
+  if(pName == "JBiebs"){
+  	human->setGodly();
+  }
   
   endLevel();
   startB->hide();
