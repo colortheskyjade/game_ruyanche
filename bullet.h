@@ -11,7 +11,7 @@ class Player;
 
 class Bullet : public Thing{
 	public:
-		Bullet(QPixmap* p, int x, int y, bool up, int attack, bool red = 0, bool heart = 0);
+		Bullet(QPixmap* p, int x, int y, bool up, int attack, bool red = 0, bool heart = 0, bool beam = 0);
 		~Bullet();
 		
 		void move();
@@ -23,7 +23,7 @@ class Bullet : public Thing{
 		int getScore(){if(heart) return 500; return 0;}
 		
 	private:
-		bool up, red, valid, heart;
+		bool up, red, valid, heart, beam;
 		int attack;
 };
 

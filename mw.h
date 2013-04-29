@@ -81,7 +81,7 @@ class MainWindow : public QMainWindow{
 		QTimer * timer, *timer2;
 		QGraphicsScene *gameScene, *mainScene;
 		QGraphicsView *gameView, *mainView;
-		QPixmap *ab1, *ab2, *ag1, *ag2, *apl, *ap, *ar1, *ar2, *ar3, *pbullet, *bbullet, *gbullet, *widebulletpic, *heartpic;
+		QPixmap *ab1, *ab2, *ag1, *ag2, *apl, *ap, *ar1, *ar2, *ar3, *pbullet, *bbullet, *gbullet, *widebulletpic, *heartpic, *rainbow;
 		QTextEdit *hpL, *nameL, *scoreL;
 		QLabel *errorL, *nextWave, *endScore;
 		QPushButton *startB, *restartB, *endB, *resumeB, *pauseB;
@@ -97,10 +97,11 @@ class MainWindow : public QMainWindow{
 		std::string pName;
 		QString playerName;
 		
+		Thing* redShip;
 		std::vector<Thing*> enemies;
 		std::vector<Thing*> ebullets;
 		std::vector<Thing*> pbullets;
-		Thing * tractorB;
+		std::deque<Thing*> beampellets;
 		
 		Player* human;
 		int maxhp;

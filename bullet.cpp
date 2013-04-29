@@ -1,6 +1,6 @@
 #include "bullet.h"
 
-Bullet::Bullet(QPixmap* p, int x, int y, bool up, int attack, bool red, bool heart) : Thing(p, x, y, 0 , 0), heart(heart), attack(attack){
+Bullet::Bullet(QPixmap* p, int x, int y, bool up, int attack, bool red, bool heart, bool beam) : Thing(p, x, y, 0 , 0), heart(heart), beam(beam), attack(attack){
 	valid = true;
 	vx = 0;
 	if(up){
@@ -21,6 +21,11 @@ Bullet::Bullet(QPixmap* p, int x, int y, bool up, int attack, bool red, bool hea
 	}
 	else{
 		h = 10;
+	}
+	if(beam){
+		h = 2;
+		vy = 2;
+		w = 30;
 	}
 }
 

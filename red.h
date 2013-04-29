@@ -16,11 +16,13 @@ class Red : public Thing{
 		void move();
 		void action();
 		bool isValid();
-		int getScore(){	return 1000;}
+		void nextState(){state = 4;}
+		int getScore(){	return score;}
+		void gotHit(int);
 		
 	private:
 		QPixmap *p1, *p2, *p3;
-		int maxX, minX, count, attack, state, ani, bounce, targetX;
+		int maxX, minX, count, attack, state, ani, bounce, targetX, score;
 		MainWindow *m;
 		Player* human;
 		bool valid;

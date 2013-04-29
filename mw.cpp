@@ -38,6 +38,7 @@ MainWindow::MainWindow() : QMainWindow(){
 	gbullet = new QPixmap("images/greenbullet.png");
 	widebulletpic = new QPixmap("images/redbullet.png");
 	heartpic = new QPixmap("images/heart.png");
+	rainbow = new QPixmap("images/rainbow.png");
 	
 	h1 = new QGraphicsPixmapItem(*heartpic);
 	h1->setPos(400, 575);
@@ -194,9 +195,9 @@ void MainWindow::handleTimer(){
 	
 	// randomly add mothership
 	if(!(rand() % 300) && !hasRed){
-		Thing* addMe = new Red(ar1, ar2, ar3, 10, 15, this, human);
-		enemies.push_back(addMe);
-		gameScene->addItem(addMe);
+		redShip = new Red(ar1, ar2, ar3, 10, 15, this, human);
+		enemies.push_back(redShip);
+		gameScene->addItem(redShip);
 		hasRed = true;
 	}
 
@@ -291,6 +292,34 @@ void MainWindow::handleTimer(){
 		oobullets.pop_front();
 	}
 	
+	// now do the beam
+	
+	bool beamOK = true;
+	
+	for(unsigned int i = 0; i < beampellets.size(); i++){
+		if(static_cast<Bullet*>(beampellets[i])->isCollides(human)){
+			human->gotHit(100);
+			beamOK = false;
+		}
+	}
+	
+	for(unsigned int i = 0; i < beampellets.size(); i++){
+		beampellets[i]->action();
+		beampellets[i]->move();
+		if(!beampellets[i]->isValid()){
+			static_cast<Red*>(redShip)->nextState();
+			beamOK = false;
+			break;
+		}
+	}
+	
+	if(!beamOK){
+		for(unsigned int i = 0; i < beampellets.size(); i++){
+			delete beampellets[i];
+		}
+		beampellets.clear();
+	}
+	
 	// check the enemy bullets with the player
 	for(unsigned int i = 0; i < ebullets.size(); i++){
 		if(static_cast<Bullet*>(ebullets[i])->isCollides(human)){
@@ -382,7 +411,7 @@ void MainWindow::makeBlueBullet(int x, int y){
 }
 
 void MainWindow::makeBigBullet(int x, int y){
-	Thing* addMe = new Bullet(widebulletpic,x,y,false,attack * 2);
+	Thing* addMe = new Bullet(widebulletpic,x,y,false,attack * 2, true);
 	gameScene->addItem(addMe);
   ebullets.push_back(addMe);
 }
@@ -394,8 +423,9 @@ void MainWindow::makePlayerBullet(int x, int y){
 }
 
 void MainWindow::fireBeam(int x, int y){
-	tractorB = new Beam(pbullet,x,y);
-	gameScene->addItem(tractorB);
+	Thing* addMe = new Bullet(rainbow,x,y,false,0, false, false, true);
+	beampellets.push_back(addMe);
+	gameScene->addItem(addMe);
 }
 
 
@@ -456,8 +486,8 @@ void MainWindow::nextLevel(){
 }
 
 void MainWindow::newLevel(int l){
+	beampellets.clear();
 	hasRed = false;
-	tractorB = NULL;
 	ecount = 0;
 	gameSpeed = gameSpeed * 3 / 5 + 1;
 	attack += 1;
