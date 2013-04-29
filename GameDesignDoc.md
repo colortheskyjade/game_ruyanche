@@ -145,31 +145,20 @@ Notes:
 ## Pictures of what your interface would look like
 
 ### Start Screen
-![Start Screen](images/gamefront.png "Start Screen")
-* Start screen will then lead to a screen that simply asks for a username, with a back button and a start button
-* Username will be displayed at the end when the score is displayed
+![Start Screen](images/startscreen.png "Start Screen")
 
-### Help Screen
-![Help](images/gamehelp.png "Help")
-
-### Sample Game Screen
-![Game](images/gameplay.png "Game")
-* Currently using blocks to represent ships
-* Hearts will be a different color 
-* Color of play ship is yellow for now, but will be determined later
+### Game Screen
+![Game](images/playscreen.png "Game")
 
 * The game is split into 5 sections
 	* Top - Mothership section, only one mothership will spawn here at a time
 	* Top-mid - Blue/green ship section, only blue and green ships will spawn here randomly
 	* Bottom-mid - Purple ship section, only purple ships will spawn here
 	* Top-bottom - Abduction section, the mothership will only appear here if it wants to abduct the player
-	* Bottom - Player section, player cannot move out of this section. 
-
-### Pause Menu
-![Pause](images/gamepause.png "Pause")
+	* Bottom - Player section, player cannot move out of this section.
 
 ### Game End
-![End](images/gameend.png "End")
+![End](images/endscreen.png "End")
 
 ### Credits
 Graphics made in Adobe Photoshop CS6
