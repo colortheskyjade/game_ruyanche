@@ -4,6 +4,9 @@ GScene::GScene(MainWindow *mw) : QGraphicsScene(), m(mw){}
 
 void GScene::keyPressEvent( QKeyEvent *e ) {
 	int v = 5;
+	// move in a different direction depending on the keypress
+	// use esc to pause/unpause
+	// use space to shoot
 	switch ( e->key() ) {
 		case Qt::Key_Left :
 			m->moveP(-1 * v, 0);

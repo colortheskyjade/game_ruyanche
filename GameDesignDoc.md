@@ -171,3 +171,7 @@ Notes:
 ### Game End
 ![End](images/gameend.png "End")
 
+### Credits
+Graphics made in Adobe Photoshop CS6
+Background image: http://universe-beauty.com/Space-art/Unsorted-space-art/stars-and-planets-photo-img87-895p.html
+

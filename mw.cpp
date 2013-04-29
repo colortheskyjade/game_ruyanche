@@ -22,7 +22,6 @@ MainWindow::MainWindow() : QMainWindow(){
 	timer2->setInterval(100);
 	
 	// Load ALL THE PICTURES
-	
 	ab1 = new QPixmap("images/actualblue-1.png");
   ab2 = new QPixmap("images/actualblue-2.png");
   ag1 = new QPixmap("images/actualgreen-1.png");
@@ -40,6 +39,7 @@ MainWindow::MainWindow() : QMainWindow(){
 	heartpic = new QPixmap("images/heart.png");
 	rainbow = new QPixmap("images/rainbow.png");
 	
+	// This is for the hearts
 	h1 = new QGraphicsPixmapItem(*heartpic);
 	h1->setPos(400, 575);
 	h1->setVisible(false);
@@ -56,7 +56,7 @@ MainWindow::MainWindow() : QMainWindow(){
 	h5->setPos(300, 575);
 	h5->setVisible(false);
   
-	//Initialize the Scenes and Views
+	// Initialize the Scenes and Views
   gameScene = new GScene(this);
   gameView = new QGraphicsView(gameScene);
   mainScene = new QGraphicsScene;
@@ -64,12 +64,14 @@ MainWindow::MainWindow() : QMainWindow(){
   
   mainView->setWindowTitle("Starships (were meant to fly...)");
   
+  // Now add the hearts 
 	gameScene->addItem(h1);
 	gameScene->addItem(h2);
 	gameScene->addItem(h3);
 	gameScene->addItem(h4);
 	gameScene->addItem(h5);
   
+  // Make the layouts
   holder = new QWidget;
   holder2 = new QWidget;
   holder3 = new QWidget;
@@ -78,8 +80,6 @@ MainWindow::MainWindow() : QMainWindow(){
 	layout3 = new QHBoxLayout(holder3);
   
   //Set the attributes to the game scene
-  //Image Credit: http://universe-beauty.com/Space-art/Unsorted-space-art/stars-and-planets-photo-img87-895p.html
-  
   QBrush bg(QPixmap("images/background.png"));
   gameScene->setBackgroundBrush(bg);
   gameScene->setSceneRect(0,0,425,600);
@@ -87,17 +87,12 @@ MainWindow::MainWindow() : QMainWindow(){
  	gameView->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
   gameView->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
   
-  // Making buttons
-  // Playas love buttons
-  
+  // Make buttons
+  // Players love buttons
   startB = new QPushButton("Start");
   startB->setGeometry(160, 250, 100, 60);
   startB->setStyleSheet("background-color:rgba(0,0,0,0); color:#ffffff; font-size:36px;");
   gameScene->addWidget(startB);
-  
-  nameB = new QTextEdit;
-  nameB->setFixedHeight(28);
-  nameB->setStyleSheet("background-color:rgb(0,0,0); color:#ffffff;");
    
   restartB = new QPushButton("Start");
   restartB->setFixedHeight(28);
@@ -105,8 +100,12 @@ MainWindow::MainWindow() : QMainWindow(){
   pauseB->setFixedHeight(28);
   endB = new QPushButton("Quit");
   endB->setFixedHeight(28);
+  
+  nameB = new QTextEdit;
+  nameB->setFixedHeight(28);
+  nameB->setStyleSheet("background-color:rgb(0,0,0); color:#ffffff;");
 
-  // Connecting the timer to many things
+  // Connecting the timers and buttons 
   connect(timer, SIGNAL(timeout()), this, SLOT(handleTimer()));
   connect(timer2, SIGNAL(timeout()), this, SLOT(nextLevel()));
   connect(startB, SIGNAL(clicked()), this, SLOT(startGame()));
@@ -175,6 +174,7 @@ MainWindow::MainWindow() : QMainWindow(){
  	mainView->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
   mainView->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
   
+  // Setting these for faster rendering
   gameView->setAttribute(Qt::WA_OpaquePaintEvent);
   gameView->setAttribute(Qt::WA_NoSystemBackground);
  	mainView->setAttribute(Qt::WA_OpaquePaintEvent);
@@ -204,7 +204,6 @@ void MainWindow::handleTimer(){
 	}
 
 	// add enemies
-
 	if(enemies.empty() && ecount == 17){
 		endLevel();
 	}
@@ -250,6 +249,7 @@ void MainWindow::handleTimer(){
 		}
 	}
 	
+	// delete bad enemies
 	while(!oenemies.empty()){
 		score += enemies[oenemies[0]]->getScore();
 		delete enemies[oenemies[0]];
@@ -269,6 +269,7 @@ void MainWindow::handleTimer(){
 		}
 	}
 		
+	// delete bad enemy bullets
 	while(!obullets.empty()){
 		delete ebullets[obullets[0]];
 		ebullets.erase(ebullets.begin() + obullets[0]);
@@ -288,6 +289,7 @@ void MainWindow::handleTimer(){
 		}
 	}
 		
+	// delete bad player bullets
 	while(!oobullets.empty()){
 		delete pbullets[oobullets[0]];
 		pbullets.erase(pbullets.begin() + oobullets[0]);
@@ -295,9 +297,9 @@ void MainWindow::handleTimer(){
 	}
 	
 	// now do the beam
-	
 	bool beamOK = true;
 	
+	// check if it hits the player
 	for(unsigned int i = 0; i < beampellets.size(); i++){
 		if(static_cast<Bullet*>(beampellets[i])->isCollides(human)){
 			human->gotHit(100);
@@ -305,6 +307,7 @@ void MainWindow::handleTimer(){
 		}
 	}
 	
+	// check if it gets to the end, update the redShip accordingly
 	for(unsigned int i = 0; i < beampellets.size(); i++){
 		beampellets[i]->action();
 		beampellets[i]->move();
@@ -315,6 +318,7 @@ void MainWindow::handleTimer(){
 		}
 	}
 	
+	// if one part of the beam breaks, it all breaks
 	if(!beamOK){
 		for(unsigned int i = 0; i < beampellets.size(); i++){
 			delete beampellets[i];
@@ -339,18 +343,18 @@ void MainWindow::handleTimer(){
 	// heart display
 	human->action();
 	int getLives = human->getLives();
-	if(getLives > 4){
-		h5->setVisible(true);
-	}
-	else{
-		h5->setVisible(false);
-	}
-	if(getLives > 3){
-		h4->setVisible(true);
-	}
-	else{
-		h4->setVisible(false);
-	}
+//	if(getLives > 4){
+//		h5->setVisible(true);
+//	}
+//	else{
+//		h5->setVisible(false);
+//	}
+//	if(getLives > 3){
+//		h4->setVisible(true);
+//	}
+//	else{
+//		h4->setVisible(false);
+//	}
 	if(getLives > 2){
 		h3->setVisible(true);
 	}
@@ -449,6 +453,7 @@ void MainWindow::shootP(){
 //****************************
 
 void MainWindow::startGame(){
+	srand(time(0));
 	hasRed = false;
 	errorL->hide();
 	endScore->hide();
@@ -459,28 +464,35 @@ void MainWindow::startGame(){
 		return;
 	}
 	
+	// get the player name and set it
 	pName = nameB->toPlainText().toUtf8().constData();
 	playerName = "Pilot: " + nameB->toPlainText();
 	nameL->setText(playerName);
 	nameB->setVisible(false);
 	holder3->setVisible(true);
+	// reset the score
 	scoreL->setText("Score: 0");
 	score = 0;
 
+	// reset the level
 	level = 0;
+	// make a new player ship
   human = new Player(apl,300,500,this);
   gameScene->addItem(human);
   
+  // this is the backdoor
   if(pName == "JBiebs"){
   	human->setGodly();
   }
   
+  // hide the start button, start the level
   endLevel();
   startB->hide();
 }
 
 void MainWindow::nextLevel(){
 	if(pauseMe == 20){
+		// after a bit of time, start the new level
 		timer2->stop();
 		nextWave->hide();
 		newLevel(++level);
@@ -492,20 +504,26 @@ void MainWindow::nextLevel(){
 }
 
 void MainWindow::newLevel(int l){
+	// clear the beam deque, intialize variables
 	beampellets.clear();
 	hasRed = false;
 	ecount = 0;
+	// make the game faster
 	gameSpeed = gameSpeed * 3 / 5 + 1;
 	attack += 1;
 	maxhp += 5;
 	if(l == 1){gameSpeed = 15; maxhp = 10; attack = 1;}
 	timer->setInterval(gameSpeed);
+	// reset player HP
 	human->setHP(maxhp);
+	// make temporarily invincible
 	human->setInvincible();
+	// start the game
 	timer->start();
 }
 
 void MainWindow::endLevel(){
+	// delete all bullets and enemies on screen
 	while(!ebullets.empty()){
 		delete ebullets[0];
 		ebullets.erase(ebullets.begin());
@@ -518,12 +536,14 @@ void MainWindow::endLevel(){
 		delete enemies[0];
 		enemies.erase(enemies.begin());
 	}
+	// stop the game, start the pause count
 	timer->stop();
 	nextWave->show();
 	timer2->start();
 }
 
 void MainWindow::endGame(){
+	// delete everything on screen
 	while(!ebullets.empty()){
 		delete ebullets[0];
 		ebullets.erase(ebullets.begin());
@@ -537,11 +557,12 @@ void MainWindow::endGame(){
 		enemies.erase(enemies.begin());
 	}
 	timer->stop();
-	delete human;
+	if(human) delete human;
 	human = NULL;
 	nameB->setVisible(true);
 	holder3->setVisible(false);
 	
+	// show the final score
 	std::stringstream ss2;
 	ss2 << "Score for " << pName << ": " << score;
 	QString qstr2 =  QString::fromStdString(ss2.str());

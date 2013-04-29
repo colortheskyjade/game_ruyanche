@@ -27,8 +27,9 @@ Purple::~Purple(){
 
 void Purple::isCollides(){
 	if(collidesWithItem(human)){
-			valid = false;
-			human->gotHit(1000);
+		//if it collides with the player, kill it instantly
+		valid = false;
+		human->gotHit(1000);
 	}
 }
 
@@ -39,6 +40,7 @@ bool Purple::isValid(){
 void Purple::move(){
 	if(!state){
 		if(!(count % 5)){
+			// move left and right
 			x += vx;
 		
 			if(x < minX){vx = vx * -1; x = minX;}
@@ -48,6 +50,7 @@ void Purple::move(){
 		}
 	}
 	else if(state == 1){
+		// if dead, move straight down
 		if(vx){vx = 0;}
 		if(!vy){vy = 2;}
 		if(!(count % 1)){
@@ -63,9 +66,11 @@ void Purple::action(){
 	
 	// check valid
 	if(hp <= 0){
+		// make it move down once it's dead
 		state = 1;
 	}
 	if(y > 600){
+		// delete it once it's offscreen
 		valid = false;
 	}
 }

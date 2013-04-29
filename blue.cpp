@@ -36,6 +36,7 @@ bool Blue::isValid(){
 
 void Blue::move(){
 	if(!(count % 5)){
+		// animate the ship
 		if(anim % 14 == 6){
 			setPixmap(*p1);
 		}
@@ -47,6 +48,7 @@ void Blue::move(){
 
 		x += vx;
 		
+		// bounce once it gets to the boundaries
 		if(x < minX){vx = vx * -1; x = minX;}
 		else if(x > maxX){vx = vx * -1; x = maxX;}
 		

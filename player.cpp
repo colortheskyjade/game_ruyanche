@@ -21,6 +21,8 @@ Player::~Player(){
 void Player::move(int vx, int vy){
 	x += vx;
 	y += vy;
+	
+	// make it unable to move past the boundaries
 	if(y >= 570){
 		y = 570;
 	}
@@ -33,6 +35,7 @@ void Player::move(int vx, int vy){
 	if(x >= 395){
 		x= 395;
 	}
+	
 	setPos(x, y);
 }
 
@@ -41,6 +44,7 @@ void Player::doAttack(){
 }
 
 void Player::action(){
+	// blink the ship if temporarily invincible
 	if(invincible && !godly){
 		if(!(anim % 30)){
 			setVisible(false);
@@ -56,6 +60,7 @@ void Player::action(){
 		}
 	}
 	
+	// deduct a life when you run out of HP
  	if(hp <= 0){
  		lives--;
  	}
@@ -66,6 +71,7 @@ bool Player::isDead(){
 }
 
 void Player::gotHit(int attack){
+	// only deduct HP if not invincible
 	if(!invincible && !godly){
 		hp -= attack;
 	}

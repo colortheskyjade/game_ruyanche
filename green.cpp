@@ -13,6 +13,7 @@ Green::Green(QPixmap* p, QPixmap* p2_, int x, int y, MainWindow* mw) : Thing(p2_
 	vx = 1;
 	ccw = false;
 	if(rand() % 2 == 1){
+		// half the time it will go counterclockwise
 		vx = 0;
 		vy = 1;
 		ccw = true;
@@ -24,6 +25,7 @@ Green::Green(QPixmap* p, QPixmap* p2_, int x, int y, MainWindow* mw) : Thing(p2_
 	minY = y;
 	maxY = y + 50;
 	
+	// if the boundaries go out of bounds, fix them
 	if(maxX > 400){
 		maxX = 400;
 		minX = 350;
@@ -45,6 +47,7 @@ bool Green::isValid(){
 		
 void Green::move(){
 	if(!(count % 5)){
+// took out animation because it was running too slow
 //		if(anim < 5){
 //			setPixmap(*p1);
 //			anim++;
@@ -57,7 +60,7 @@ void Green::move(){
 
 		x += vx;
 		y += vy;
-		
+		// ccw and cw movements are slightly off of each other, but turn depending on what corner you're in
 		if(!ccw){
 			if(x <= minX && y <= minY){
 				vy = 0;
@@ -118,6 +121,7 @@ void Green::move(){
 void Green::action(){
 	if(count == 15){
 		if(!(rand()%20)){
+			// randomly fire two bullets
 			m->makeGreenBullet(x+14,y+35);
 		}
 		count = 0;

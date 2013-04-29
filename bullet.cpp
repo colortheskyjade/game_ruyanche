@@ -3,6 +3,7 @@
 Bullet::Bullet(QPixmap* p, int x, int y, bool up, int attack, bool red, bool heart, bool beam) : Thing(p, x, y, 0 , 0), heart(heart), beam(beam), attack(attack){
 	valid = true;
 	vx = 0;
+	// change the movement and/or dimensions based on what kind of bullet it's supposed to be
 	if(up){
 		vy = -2;
 	}
@@ -33,6 +34,7 @@ Bullet::~Bullet(){
 }
 
 bool Bullet::isCollides(Player * human){
+	// if it collided, then the bullet should disappear
 	if(collidesWithItem(human)){
 			valid = false;
 			return true;
@@ -41,6 +43,7 @@ bool Bullet::isCollides(Player * human){
 }
 
 bool Bullet::isCollides(Thing* ship){
+	// if it collided, then the bullet should disappear
 	if(collidesWithItem(ship)){
 			valid = false;
 			return true;

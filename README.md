@@ -24,5 +24,4 @@ doxygen config.txt
 ./game_ruyanche
 ```
 
-### Screenshots -- [Optional]
-You can either remove this section or add screenshots if you wish.
+Note: If you want invincible mode, play the game as "JBiebs"

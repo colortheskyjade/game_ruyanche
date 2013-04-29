@@ -30,6 +30,7 @@ bool Red::isValid(){
 }
 
 void Red::move(){
+	// animates the ship
 	if(!(count % 2)){
 		if(ani < 10){
 			setPixmap(*p1);
@@ -45,9 +46,11 @@ void Red::move(){
 			ani = ani % 30;
 		}
 	}
+	
+	// movement depends on state
 	if(!state){
 		if(!(count % 2)){
-
+			// move left and right
 			x += vx;
 		
 			if(x <= minX){vx = vx * -1; x += vx; bounce++;}
@@ -57,6 +60,7 @@ void Red::move(){
 		}
 	}
 	else if(state == 1){
+		// teleport down and find the player
 		x = -30;
 		y = 380;
 		setX(-30);
@@ -66,6 +70,7 @@ void Red::move(){
 	}
 	else if(state == 2){
 		if(!(count % 2)){
+			// move to where the player is
 			x += 5;
 			setX(x);
 			if(x > targetX){
@@ -74,14 +79,17 @@ void Red::move(){
 		}
 	}
 	else if(state == 3){
+		// fire the beam
 		m->fireBeam(x,y+30);
 	}
 	else if(state == 4){
+		// set the new target to move to
 		targetX = -30;
 		state = 5;
 	}
 	else if(state == 5){
 		if(!(count % 2)){
+			// move back offscreen
 			x += -5;
 			setX(x);
 			if(x <= -30){
@@ -93,6 +101,7 @@ void Red::move(){
 }
 
 void Red::gotHit(int number){
+	// can only die before the beam fire
 	if(state < 3)
 		hp -= number;
 }
@@ -100,6 +109,7 @@ void Red::gotHit(int number){
 void Red::action(){
 	if(count == 20){
 		if(!(rand()%15) && state == 0){
+			// fire a bullet randomly in the first state only
 			m->makeBigBullet(x+15,y+30);
 		}
 		count = 0;
@@ -111,10 +121,12 @@ void Red::action(){
 	if(hp <= 0){
 		valid = false;
 	}
-	if(bounce == 2){
+	if(bounce == 2){	
+		// make it fly off screen
 		minX = -30;
 	}
 	if(bounce == 3){
+		// move to the next state
 		state = 1;
 		bounce++;
 	}
