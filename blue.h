@@ -7,12 +7,15 @@
 
 class MainWindow;
 
+/** Blue, inverted triangle, ship. */
 class Blue : public Thing{
 	public:
+		/** Constructor takes in pixmaps for animation, initial coords, and MainWindow pointer */
 		Blue(QPixmap*, QPixmap*, int, int, MainWindow*);
 		~Blue();
 		
 		void move();
+		/** Fires bullets randomly */
 		void action();
 		bool isValid();
 		int getScore(){return 100;}

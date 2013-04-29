@@ -38,43 +38,61 @@
 #define W_X 600
 #define W_Y 600
 
+/** Holds the entire game and implements gameplay */
 class MainWindow : public QMainWindow{
 	Q_OBJECT
 	
 	public:
+		/** Constructor initializes most game components and creates all widgets on screen. Also loads all images and connects all timers and buttons with the appropriate slot. */
 		MainWindow();
-//		~MainWindow();
 		
+		/** Shows the mainView of the application */
 		void show();
 		
 		// Game States
-		void newLevel(int);
+		/** Starts a new level
+			* @param l Level number
+			*/
+		void newLevel(int l);
+		/** Ends the level, starting the short pause between levels. */
 		void endLevel();
+		/** Ends the game. Deletes all the player data and displays the score. */
 		void endGame();
+		/** Resumes game from pause */
 		void resumeGame();
+		/** Returns true if game is paused */
 		bool isPaused();
 		
 		// Make bullets
+		/** Make the bullet for the Blue ship */
 		void makeBlueBullet(int x, int y);
+		/** Make the bullet for the Green ship */
 		void makeGreenBullet(int x, int y);
+		/** Make the bullet for the Red ship */
 		void makeBigBullet(int x, int y);
+		/** Make the bullet for the Player */
 		void makePlayerBullet(int x, int y);
+		/** Fires the beam for the Red ship */
 		void fireBeam(int, int);
-		
-		// Make beam
-		
+
 		// Player queued actions
+		/** Queues up the player's move in the specified (x,y) direction */
 		void moveP(int, int);
+		/** Queues up the player's shot */
 		void shootP();
 		
-		// Collision handling
-	
 	public slots:
+		/** Moves all of the items, checks for collisions, and updates the various widgets of the game. Also deletes items when they become unecessary. */
 		void handleTimer();
+		/** Starts the next level of the game */
 		void nextLevel();
+		/** Starts the game, creates the player and initializes the rest of the variables */
 		void startGame();
+		/** Pauses the game */
 		void pauseGame();
+		/** Restarts the game. Ends the game and immediately starts a new one. */
 		void restartGame(){endGame(); startGame();}
+		/** Quits the application. */
 		void quitGame(){QApplication::quit();}
 	
 	private:

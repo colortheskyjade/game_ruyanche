@@ -7,12 +7,15 @@
 
 class MainWindow;
 
+/** Green, angry-looking ship */
 class Green : public Thing{
 	public:
+		/** Constructor, takes in pixmaps for animation, position, and MainWindow pointer */
 		Green(QPixmap*, QPixmap*, int, int, MainWindow*);
 		~Green();
 		
 		void move();
+		/** Fires bullets as necessary */
 		void action();
 		bool isValid();
 		int getScore(){return 150;}

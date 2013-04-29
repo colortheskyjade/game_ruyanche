@@ -8,9 +8,12 @@
 
 class MainWindow;
 
+/** Inherited from QGraphicsScene to implement keyboard functions. */
 class GScene : public QGraphicsScene{
 	public:
+		/** Constructor takes in MainWindow pointer to perform functions. */
 		GScene(MainWindow*);
+		/** Responds to the left, right, up, down arrow keys, space bar, and esc key as necessary */
 		void keyPressEvent(QKeyEvent *e);
 	private:
 		MainWindow *m;

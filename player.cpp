@@ -62,7 +62,7 @@ void Player::action(){
 }
 
 bool Player::isDead(){
-	return static_cast<bool>(lives);
+	return !static_cast<bool>(lives);
 }
 
 void Player::gotHit(int attack){

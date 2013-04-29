@@ -190,7 +190,7 @@ MainWindow::MainWindow() : QMainWindow(){
 void MainWindow::handleTimer(){	
 
 	// if player is dead
-	if(!human->isDead()){
+	if(human->isDead()){
 		endGame();
 		return;
 	}
@@ -241,7 +241,7 @@ void MainWindow::handleTimer(){
 		if(enemies[i]->isValid()){
 			enemies[i]->move();
 			enemies[i]->action();
-			if(enemies[i]->purple){
+			if(enemies[i]->isPurple()){
 				static_cast<Purple*>(enemies[i])->isCollides();
 			}
 		}
