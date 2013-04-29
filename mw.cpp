@@ -393,6 +393,12 @@ void MainWindow::makePlayerBullet(int x, int y){
   pbullets.push_back(addMe);
 }
 
+void MainWindow::fireBeam(int x, int y){
+	tractorB = new Beam(pbullet,x,y);
+	gameScene->addItem(tractorB);
+}
+
+
 //****************************
 //*** PLAYER DOES STUFF ******
 //****************************
@@ -451,6 +457,7 @@ void MainWindow::nextLevel(){
 
 void MainWindow::newLevel(int l){
 	hasRed = false;
+	tractorB = NULL;
 	ecount = 0;
 	gameSpeed = gameSpeed * 3 / 5 + 1;
 	attack += 1;
