@@ -162,6 +162,6 @@ Notes:
 ![End](images/endscreen.png "End")
 
 ### Credits
-Graphics made in Adobe Photoshop CS6
-Background image: http://universe-beauty.com/Space-art/Unsorted-space-art/stars-and-planets-photo-img87-895p.html
+* Graphics made in Adobe Photoshop CS6
+* Background image: http://universe-beauty.com/Space-art/Unsorted-space-art/stars-and-planets-photo-img87-895p.html
 
