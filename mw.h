@@ -36,6 +36,8 @@
 #include "red.h"
 #include "player.h"
 #include "gscene.h"
+#include "pink.h"
+#include "yellow.h"
 
 #define W_X 600
 #define W_Y 600
@@ -72,6 +74,10 @@ class MainWindow : public QMainWindow{
 		void makeGreenBullet(int x, int y);
 		/** Make the bullet for the Red ship */
 		void makeBigBullet(int x, int y);
+		/** Make the bullet for the Pink ship */
+		void makePinkBullet(int x, int y);
+		/** Make the bullet for the Yellow ship */
+		void makeYellowBullet(int x, int y);
 		/** Make the bullet for the Player */
 		void makePlayerBullet(int x, int y);
 		/** Fires the beam for the Red ship */
@@ -101,7 +107,7 @@ class MainWindow : public QMainWindow{
 		QTimer * timer, *timer2;
 		QGraphicsScene *gameScene, *mainScene;
 		QGraphicsView *gameView, *mainView;
-		QPixmap *ab1, *ab2, *ag1, *ag2, *apl, *ap, *ar1, *ar2, *ar3, *pbullet, *bbullet, *gbullet, *widebulletpic, *heartpic, *rainbow, *bg1, *bg2, *bg3;
+		QPixmap *ab1, *ab2, *ag1, *ag2, *apl, *ap, *ar1, *ar2, *ar3, *pbullet, *bbullet, *gbullet, *widebulletpic, *heartpic, *rainbow, *bg1, *bg2, *bg3, *ppbullet, *ybullet, *ay, *app;
 		QTextEdit *hpL, *nameL, *scoreL;
 		QLabel *errorL, *nextWave, *endScore, *scoreList;
 		QPushButton *startB, *restartB, *endB, *resumeB, *pauseB;

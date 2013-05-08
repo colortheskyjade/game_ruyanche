@@ -89,6 +89,26 @@ A high-contrast themed shooting game based on Galaga and similar games. The play
 	* Appearance
 		* ![Rainbow Bullet](images/rainbow.png)
 	* Note: implemented in the game as a series of bullets that are fired frequently enough that they produce a long beam. Not technically a thing, but I felt that it was necessary to document it as a separate thing.
+7. Pink Ship - Teleporter
+	* Movement
+		* Located in the general ship area
+		* Randomly teleports to a new location within ~120 pixels of current location
+	* Characteristics
+		* HP: 4
+		* Fires pink bullets
+	* Appearance
+		* Pink flower
+		* ![Pink](images/actualpink.png)
+8. Yellow Ship - Brick
+	* Movement
+		* Located in the general ship area
+		* Does not move
+	* Characteristics
+		* HP: 10
+		* Fires yellow bullets
+	* Appearance
+		* Yellow block
+		* ![Pink](images/actualyellow.png)
 
 Notes:
 * All ships excluding mothership will be given the same (relatively slow) speed, but initial velocity is randomly generated.
@@ -160,6 +180,7 @@ Notes:
 
 ### Game End
 ![End](images/endscreen.png "End")
+* End screen now also prints out the top 10 high scores
 
 ### Credits
 * Graphics made in Adobe Photoshop CS6

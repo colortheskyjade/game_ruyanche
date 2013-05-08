@@ -120,7 +120,7 @@ void Green::move(){
 
 void Green::action(){
 	if(count == 15){
-		if(!(rand()%15)){
+		if(!(rand()%20)){
 			// randomly fire two bullets
 			m->makeGreenBullet(x+14,y+35);
 		}

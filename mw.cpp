@@ -32,10 +32,14 @@ MainWindow::MainWindow() : QMainWindow(){
   ar1 = new QPixmap("images/actualred-1.png");
   ar2 = new QPixmap("images/actualred-2.png");
   ar3 = new QPixmap("images/actualred-3.png");
+  ay = new QPixmap("images/actualyellow.png");
+  app = new QPixmap("images/actualpink.png");
   
 	pbullet = new QPixmap("images/bullet.png");
 	bbullet = new QPixmap("images/bluebullet.png");
 	gbullet = new QPixmap("images/greenbullet.png");
+	ppbullet = new QPixmap("images/pinkbullet.png");
+	ybullet = new QPixmap("images/yellowbullet.png");
 	widebulletpic = new QPixmap("images/redbullet.png");
 	heartpic = new QPixmap("images/heart.png");
 	rainbow = new QPixmap("images/rainbow.png");
@@ -221,14 +225,20 @@ void MainWindow::handleTimer(){
 	}
 	
 	if(ecount < maxcount){
-		int select = rand() % 7;
+		int select = rand() % 9;
 		Thing * addMe;
 		
-		if(select < 4){
+		if(select < 3){
 			addMe =  new Blue(ab1, ab2, rand() % 280 + 10, rand() % 250 + 50, this);
 		}
-		else if(select < 6){
+		else if(select < 5){
 			addMe =  new Green(ag1, ag2, rand() % 280 + 10, rand() % 250 + 50, this);
+		}
+		else if(select < 7){
+			addMe =  new Pink(app, rand() % 280 + 10, rand() % 250 + 50, this);
+		}
+		else if(select < 8){
+			addMe =  new Yellow(ay, rand() % 280 + 10, rand() % 250 + 50, this);
 		}
 		else{
 			addMe =  new Purple(ap, rand() % 280 + 10, 350, this, human);
@@ -431,6 +441,18 @@ void MainWindow::makeGreenBullet(int x, int y){
 
 void MainWindow::makeBlueBullet(int x, int y){
 	Thing* addMe = new Bullet(bbullet,x,y,false,attack);
+	gameScene->addItem(addMe);
+  ebullets.push_back(addMe);
+}
+
+void MainWindow::makePinkBullet(int x, int y){
+	Thing* addMe = new Bullet(ppbullet,x,y,false,attack);
+	gameScene->addItem(addMe);
+  ebullets.push_back(addMe);
+}
+
+void MainWindow::makeYellowBullet(int x, int y){
+	Thing* addMe = new Bullet(ybullet,x,y,false,attack);
 	gameScene->addItem(addMe);
   ebullets.push_back(addMe);
 }
