@@ -126,11 +126,17 @@ Notes:
 * Levels
 	* Levels are reached after a player kills all ships on screen. 
 	* Levels are referred to as waves in the game
-	* All waves are 17 ships each (not counting the mothership), the position and numbers of each ship are randomly generated
-	* Player is healed between levels
+	* The position and numbers of each ship are randomly generated
+	* HP difference is maintained between levels (player is healed 5 for the 5 extra HP they gain)
 * Increasing Difficulty
 	* Timer speeds up each level, making everything move faster
 	* Attacks of each ship increase each level
+	* Ships increase each level as follows:
+		* Level 1 - 15 ships
+		* Level 2 - 20 ships
+		* Level 3+ - 25 ships
+	* Levels are indicated by the background of the game
+	* Scores are usually indicative of the level the player died at because of the fixed number of ships
 * Player Controls
 	* Player can only move around and shoot, no extra abilities
 	* Player can only move in a region below the ship spaw region, so they cannot be "above" the enemy
@@ -145,6 +151,8 @@ Notes:
 	* Green - 150pt
 	* Purple - 300pt
 	* Red - 1000pt
+	* Pink - 400pt
+	* Yellow - 50pt
 
 ## How to keep track of lives
 * Each user starts with 3 lives
@@ -185,6 +193,14 @@ Notes:
 ### Game End
 ![End](images/endscreen.png "End")
 * End screen now also prints out the top 10 high scores
+
+### Level Backrounds
+* One
+![one](images/background.png)
+* Two
+![two](images/background2.png)
+* Three+
+![three](images/background3.png)
 
 ### Credits
 * Graphics made in Adobe Photoshop CS6
