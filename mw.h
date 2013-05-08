@@ -101,7 +101,7 @@ class MainWindow : public QMainWindow{
 		/** Restarts the game. Ends the game and immediately starts a new one. */
 		void restartGame(){endGame(); startGame();}
 		/** Quits the application. */
-		void quitGame(){endGame(); QApplication::quit();}
+		void quitGame(){endGame();}
 	
 	private:
 		QTimer * timer, *timer2;
