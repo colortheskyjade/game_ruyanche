@@ -77,6 +77,10 @@ A high-contrast themed shooting game based on Galaga and similar games. The play
 		* ![Player Bullet](images/bluebullet.png)
 		* Green ship bullet
 		* ![Player Bullet](images/greenbullet.png)
+		* Pink ship bullet
+		* ![Player Bullet](images/pinkbullet.png)
+		* Yellow ship bullet
+		* ![Player Bullet](images/yellowbullet.png)
 		* Red ship bullet
 		* ![Player Bullet](images/redbullet.png)
 6. Beam
