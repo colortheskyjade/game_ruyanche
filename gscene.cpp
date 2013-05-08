@@ -29,7 +29,7 @@ void GScene::keyPressEvent( QKeyEvent *e ) {
 			space = true;
 			break;
 		case Qt::Key_Escape :
-			m->resumeGame();
+			m->pauseGame();
 			break;
 	}
 }

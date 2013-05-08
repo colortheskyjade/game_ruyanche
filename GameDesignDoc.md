@@ -59,7 +59,7 @@ A high-contrast themed shooting game based on Galaga and similar games. The play
 	* Characteristics
 		* HP: 6
 		* Does not fire bullet
-		* When killed, will quickly move downwards until off screen
+		* When killed, will quickly move towards the player until it hits or goes offscreen
 		* If player collides with the purple ship, they will lose a life
 	* Appearance
 		* Upside down purple jellyfish with black "X" for eyes
