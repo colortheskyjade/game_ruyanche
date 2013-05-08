@@ -1,34 +1,77 @@
 #include "gscene.h"
 
-GScene::GScene(MainWindow *mw) : QGraphicsScene(), m(mw){}
+GScene::GScene(MainWindow *mw) : QGraphicsScene(), m(mw){
+	left = false;
+	right = false;
+	up = false;
+	down = false;
+	space = false;
+}
 
 void GScene::keyPressEvent( QKeyEvent *e ) {
-	int v = 5;
 	// move in a different direction depending on the keypress
 	// use esc to pause/unpause
 	// use space to shoot
 	switch ( e->key() ) {
 		case Qt::Key_Left :
-			m->moveP(-1 * v, 0);
+			left = true;
 			break;
 		case Qt::Key_Right :
-			m->moveP(v, 0);
+			right = true;
 			break;
 		case Qt::Key_Up :
-			m->moveP(0, -1 * v);
+			up = true;
 			break;
 		case Qt::Key_Down :
-			m->moveP(0, v);
+			down = true;
 			break;
 		case Qt::Key_Space :
-			m->shootP();
+			space = true;
 			break;
 		case Qt::Key_Escape :
-			if(m->isPaused()){m->resumeGame();}
-			else{m->pauseGame();}
+			m->resumeGame();
 			break;
 	}
-	// there exists a keyReleaseEvent
-	// do a lot of bools
-	// and uh... yeah have to handleTimer this gdi thing too 
+}
+
+void GScene::keyReleaseEvent( QKeyEvent *e ) {
+	// move in a different direction depending on the keypress
+	// use esc to pause/unpause
+	// use space to shoot
+	switch ( e->key() ) {
+		case Qt::Key_Left :
+			left = false;
+			break;
+		case Qt::Key_Right :
+			right = false;
+			break;
+		case Qt::Key_Up :
+			up = false;
+			break;
+		case Qt::Key_Down :
+			down = false;
+			break;
+		case Qt::Key_Space :
+			space = false;
+			break;
+	}
+}
+
+void GScene::action(){
+	int v = 2;
+	if(left){
+		m->moveP(-1 * v, 0);
+	}
+	if(right){
+		m->moveP(v , 0);
+	}
+	if(up){
+		m->moveP(0, -1 * v);
+	}
+	if(down){
+		m->moveP(0, v);
+	}
+	if(space){
+		m->shootP();
+	}
 }

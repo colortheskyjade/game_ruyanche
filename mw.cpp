@@ -10,6 +10,7 @@ MainWindow::MainWindow() : QMainWindow(){
 	level = 1;
 	pauseMe = 0;
 	human = NULL;
+	anim = 0;
 	
 	// Master Timer
 	timer = new QTimer;
@@ -94,7 +95,7 @@ MainWindow::MainWindow() : QMainWindow(){
   // Make buttons
   // Players love buttons
   startB = new QPushButton("Start");
-  startB->setGeometry(160, 250, 100, 60);
+  startB->setGeometry(160, 475, 100, 60);
   startB->setStyleSheet("background-color:rgba(0,0,0,0); color:#ffffff; font-size:36px;");
   gameScene->addWidget(startB);
    
@@ -152,7 +153,14 @@ MainWindow::MainWindow() : QMainWindow(){
   
   endScore = new QLabel;
   endScore->setStyleSheet("background-color:rgba(0,0,0,1); color:#ffffff; font-size:26px;");
-  endScore->setGeometry(QRect(0,150,425,80));
+  endScore->setGeometry(QRect(0,50,425,80));
+  endScore->setAlignment(Qt::AlignCenter);
+  endScore->hide();
+  gameScene->addWidget(endScore);
+  
+  endScore = new QLabel;
+  endScore->setStyleSheet("background-color:rgba(0,0,0,1); color:#ffffff; font-size:26px;");
+  endScore->setGeometry(QRect(0,100,425,500));
   endScore->setAlignment(Qt::AlignCenter);
   endScore->hide();
   gameScene->addWidget(endScore);
@@ -208,11 +216,11 @@ void MainWindow::handleTimer(){
 	}
 
 	// add enemies
-	if(enemies.empty() && ecount == 17){
+	if(enemies.empty() && ecount == maxcount){
 		endLevel();
 	}
 	
-	if(ecount < 17){
+	if(ecount < maxcount){
 		int select = rand() % 7;
 		Thing * addMe;
 		
@@ -385,15 +393,21 @@ void MainWindow::handleTimer(){
 	}
 	
 	// do the queued player things
-	if(pvx || pvy){
-		human->move(pvx,pvy);
+	static_cast<GScene*>(gameScene)->action();
+	if(++anim % 3 == 0){
+		if(pvx || pvy){
+			human->move(pvx,pvy);
+		}
+		
+		if(pattack && anim % 12 == 0){
+			human->doAttack();
+			pattack = false;
+			anim = 0;
+		}
 	}
+
 	if(pvx != 0){pvx += -1 * abs(pvx)/pvx;}
-	if(pvy != 0){pvy += -1 * abs(pvy)/pvy;}
-	if(pattack){
-		human->doAttack();
-		pattack = false;
-	}
+	if(pvy != 0){pvy += -1 * abs(pvy)/pvy;}	
 	
 	// update score
 	std::stringstream ss2;
@@ -447,6 +461,12 @@ void MainWindow::fireBeam(int x, int y){
 void MainWindow::moveP(int vx, int vy){
 	pvx += vx;
 	pvy += vy;
+	if(abs(pvx) > 10){
+		pvx = 10 * abs(pvx)/pvx;
+	}
+	if(abs(pvy) > 10){
+		pvy = 10 * abs(pvy)/pvy;
+	}
 }
 
 void MainWindow::shootP(){
@@ -465,6 +485,7 @@ void MainWindow::startGame(){
 	highScores.clear();
 	for(int i = 0; i < 10; i++){
 		hScore >> tempScore;
+		hScore.get();
 		std::getline(hScore, tempName);
 		highScores.insert (std::pair<int,std::string>(tempScore, tempName) );
 	}
@@ -526,14 +547,17 @@ void MainWindow::newLevel(int l){
 	if(attack == 1){
 		  QBrush back1(*bg1);
  			gameScene->setBackgroundBrush(back1);
+ 			maxcount = 15;
 	}
 	else if(attack == 2){
 		  QBrush back2(*bg2);
  			gameScene->setBackgroundBrush(back2);
+ 			maxcount = 20;
 	}
 	else if(attack == 3){
 		  QBrush back3(*bg3);
  			gameScene->setBackgroundBrush(back3);
+ 			maxcount = 25;
 	
 	}
 	beampellets.clear();

@@ -15,8 +15,11 @@ class GScene : public QGraphicsScene{
 		GScene(MainWindow*);
 		/** Responds to the left, right, up, down arrow keys, space bar, and esc key as necessary */
 		void keyPressEvent(QKeyEvent *e);
+		void keyReleaseEvent(QKeyEvent *e);
+		void action();
 	private:
 		MainWindow *m;
+		bool left, right, up, down, space;
 };
 
 #endif

@@ -102,10 +102,10 @@ class MainWindow : public QMainWindow{
 		QGraphicsView *gameView, *mainView;
 		QPixmap *ab1, *ab2, *ag1, *ag2, *apl, *ap, *ar1, *ar2, *ar3, *pbullet, *bbullet, *gbullet, *widebulletpic, *heartpic, *rainbow, *bg1, *bg2, *bg3;
 		QTextEdit *hpL, *nameL, *scoreL;
-		QLabel *errorL, *nextWave, *endScore;
+		QLabel *errorL, *nextWave, *endScore, *scoreList;
 		QPushButton *startB, *restartB, *endB, *resumeB, *pauseB;
 		QTextEdit* nameB;
-		int gameSpeed, attack, ecount, level, pauseMe, score;
+		int gameSpeed, attack, ecount, level, pauseMe, score, anim, maxcount;
 		bool paused, hasRed;
 		QGraphicsPixmapItem *h1,*h2,*h3,*h4,*h5;
 		

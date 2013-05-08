@@ -52,7 +52,7 @@ void Purple::move(){
 	else if(state == 1){
 		// if dead, move straight down
 		if(vx){vx = 0;}
-		if(!vy){vy = 2;}
+		if(!vy){vy = 4;}
 		if(!(count % 1)){
 			y += vy;
 			setY(y);
