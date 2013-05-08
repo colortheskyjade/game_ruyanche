@@ -59,7 +59,7 @@ void Blue::move(){
 void Blue::action(){
 	// random shooting
 	if(count == 15){
-		if(!(rand()%15)){
+		if(!(rand()%10)){
 			m->makeBlueBullet(x+15,y+30);
 		}
 		count = 0;

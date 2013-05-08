@@ -27,7 +27,7 @@ class Purple : public Thing{
 		
 	private:
 		int maxX, minX, count;
-		bool valid; 
+		bool valid, trackMe; 
 		MainWindow *m;
 		Player* human;
 		int state; //0 = normal, 1 = "dead", 2 = actually dead

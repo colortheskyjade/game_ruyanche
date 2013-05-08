@@ -25,6 +25,7 @@
 #include <deque>
 #include <sstream>
 #include <fstream>
+#include <algorithm>
 
 // Others
 #include "thing.h"

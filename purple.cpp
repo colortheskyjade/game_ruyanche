@@ -48,14 +48,21 @@ void Purple::move(){
 		
 			setX(x);
 		}
+		trackMe = true;
 	}
 	else if(state == 1){
-		// if dead, move straight down
-		if(vx){vx = 0;}
-		if(!vy){vy = 4;}
+		if(trackMe){
+			int by = human->getY() - y;
+			int bx = human->getX() - x;
+			vx = bx / 30;
+			vy = by / 30;
+			trackMe = false;
+		}
 		if(!(count % 1)){
 			y += vy;
 			setY(y);
+			x += vx;
+			setX(x);
 		}
 	}
 }

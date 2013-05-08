@@ -153,17 +153,17 @@ MainWindow::MainWindow() : QMainWindow(){
   
   endScore = new QLabel;
   endScore->setStyleSheet("background-color:rgba(0,0,0,1); color:#ffffff; font-size:26px;");
-  endScore->setGeometry(QRect(0,50,425,80));
+  endScore->setGeometry(QRect(0,40,425,80));
   endScore->setAlignment(Qt::AlignCenter);
   endScore->hide();
   gameScene->addWidget(endScore);
   
-  endScore = new QLabel;
-  endScore->setStyleSheet("background-color:rgba(0,0,0,1); color:#ffffff; font-size:26px;");
-  endScore->setGeometry(QRect(0,100,425,500));
-  endScore->setAlignment(Qt::AlignCenter);
-  endScore->hide();
-  gameScene->addWidget(endScore);
+  scoreList = new QLabel;
+  scoreList->setStyleSheet("background-color:rgba(0,0,0,1); color:#ffffff; font-size:26px;");
+  scoreList->setGeometry(QRect(0,55,425,500));
+  scoreList->setAlignment(Qt::AlignCenter);
+  scoreList->hide();
+  gameScene->addWidget(scoreList);
   
   // Set the layouts
   layout2->addWidget(restartB);
@@ -526,6 +526,7 @@ void MainWindow::startGame(){
   // hide the start button, start the level
   endLevel();
   startB->hide();
+  scoreList->hide();
 }
 
 void MainWindow::nextLevel(){
@@ -569,7 +570,7 @@ void MainWindow::newLevel(int l){
 	if(l == 1){gameSpeed = 15; maxhp = 10; attack = 1;}
 	timer->setInterval(gameSpeed);
 	// reset player HP
-	human->setHP(maxhp);
+	human->setHP(std::min(maxhp, human->getHP() + 5));
 	// make temporarily invincible
 	human->setInvincible();
 	// start the game
@@ -603,9 +604,18 @@ void MainWindow::endGame(){
 	std::ofstream outfile("highscores.txt");
 	std::multimap<int, std::string>::reverse_iterator it;
 	
+	
+	std::stringstream ss;
+	ss << "High Scores\n";
+	
 	for(it = highScores.rbegin(); it != highScores.rend(); ++it){
 		outfile << it->first << " " << it->second << std::endl;
+		ss << it->first << " " << it->second << "\n";
 	}
+	
+	QString qstr = QString::fromStdString(ss.str());
+	scoreList->setText(qstr);
+	scoreList->show();
 
 	// delete everything on screen
 	while(!ebullets.empty()){
