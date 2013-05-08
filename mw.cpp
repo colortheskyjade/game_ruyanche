@@ -39,6 +39,10 @@ MainWindow::MainWindow() : QMainWindow(){
 	heartpic = new QPixmap("images/heart.png");
 	rainbow = new QPixmap("images/rainbow.png");
 	
+	bg1 = new QPixmap("images/background.png");
+	bg2 = new QPixmap("images/background2.png");
+	bg3 = new QPixmap("images/background3.png");
+	
 	// This is for the hearts
 	h1 = new QGraphicsPixmapItem(*heartpic);
 	h1->setPos(400, 575);
@@ -80,7 +84,7 @@ MainWindow::MainWindow() : QMainWindow(){
 	layout3 = new QHBoxLayout(holder3);
   
   //Set the attributes to the game scene
-  QBrush bg(QPixmap("images/background.png"));
+  QBrush bg(bg1);
   gameScene->setBackgroundBrush(bg);
   gameScene->setSceneRect(0,0,425,600);
   gameView->setFixedSize(430,605);
@@ -383,8 +387,9 @@ void MainWindow::handleTimer(){
 	// do the queued player things
 	if(pvx || pvy){
 		human->move(pvx,pvy);
-		pvx = 0; pvy = 0;
 	}
+	if(pvx != 0){pvx += -1 * abs(pvx)/pvx;}
+	if(pvy != 0){pvy += -1 * abs(pvy)/pvy;}
 	if(pattack){
 		human->doAttack();
 		pattack = false;
@@ -440,8 +445,8 @@ void MainWindow::fireBeam(int x, int y){
 //****************************
 
 void MainWindow::moveP(int vx, int vy){
-	pvx = vx;
-	pvy = vy;
+	pvx += vx;
+	pvy += vy;
 }
 
 void MainWindow::shootP(){
@@ -505,6 +510,19 @@ void MainWindow::nextLevel(){
 
 void MainWindow::newLevel(int l){
 	// clear the beam deque, intialize variables
+	if(attack == 1){
+		  QBrush back1(bg1);
+ 			gameScene->setBackgroundBrush(back1);
+	}
+	else if(attack == 2){
+		  QBrush back2(bg2);
+ 			gameScene->setBackgroundBrush(back2);
+	}
+	else if(attack == 3){
+		  QBrush back3(bg3);
+ 			gameScene->setBackgroundBrush(back3);
+	
+	}
 	beampellets.clear();
 	hasRed = false;
 	ecount = 0;
@@ -577,7 +595,7 @@ bool MainWindow::isPaused(){
 }
 
 void MainWindow::pauseGame(){
-	if(paused){
+	if(paused && human){
 		resumeGame();
 		return;
 	}

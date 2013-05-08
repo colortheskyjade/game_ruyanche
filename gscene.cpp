@@ -28,4 +28,7 @@ void GScene::keyPressEvent( QKeyEvent *e ) {
 			else{m->pauseGame();}
 			break;
 	}
+	// there exists a keyReleaseEvent
+	// do a lot of bools
+	// and uh... yeah have to handleTimer this gdi thing too 
 }
