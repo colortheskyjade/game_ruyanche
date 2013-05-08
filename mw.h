@@ -24,6 +24,7 @@
 #include <iostream>
 #include <deque>
 #include <sstream>
+#include <fstream>
 
 // Others
 #include "thing.h"
@@ -93,13 +94,13 @@ class MainWindow : public QMainWindow{
 		/** Restarts the game. Ends the game and immediately starts a new one. */
 		void restartGame(){endGame(); startGame();}
 		/** Quits the application. */
-		void quitGame(){QApplication::quit();}
+		void quitGame(){endGame(); QApplication::quit();}
 	
 	private:
 		QTimer * timer, *timer2;
 		QGraphicsScene *gameScene, *mainScene;
 		QGraphicsView *gameView, *mainView;
-		QPixmap *ab1, *ab2, *ag1, *ag2, *apl, *ap, *ar1, *ar2, *ar3, *pbullet, *bbullet, *gbullet, *widebulletpic, *heartpic, *rainbow;
+		QPixmap *ab1, *ab2, *ag1, *ag2, *apl, *ap, *ar1, *ar2, *ar3, *pbullet, *bbullet, *gbullet, *widebulletpic, *heartpic, *rainbow, *bg1, *bg2, *bg3;
 		QTextEdit *hpL, *nameL, *scoreL;
 		QLabel *errorL, *nextWave, *endScore;
 		QPushButton *startB, *restartB, *endB, *resumeB, *pauseB;
@@ -120,6 +121,7 @@ class MainWindow : public QMainWindow{
 		std::vector<Thing*> ebullets;
 		std::vector<Thing*> pbullets;
 		std::deque<Thing*> beampellets;
+		std::multimap<int, std::string> highScores;
 		
 		Player* human;
 		int maxhp;

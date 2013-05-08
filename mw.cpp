@@ -84,7 +84,7 @@ MainWindow::MainWindow() : QMainWindow(){
 	layout3 = new QHBoxLayout(holder3);
   
   //Set the attributes to the game scene
-  QBrush bg(bg1);
+  QBrush bg(*bg1);
   gameScene->setBackgroundBrush(bg);
   gameScene->setSceneRect(0,0,425,600);
   gameView->setFixedSize(430,605);
@@ -458,6 +458,17 @@ void MainWindow::shootP(){
 //****************************
 
 void MainWindow::startGame(){
+
+	std::ifstream hScore("highscores.txt");
+	int tempScore;
+	std::string tempName;
+	highScores.clear();
+	for(int i = 0; i < 10; i++){
+		hScore >> tempScore;
+		std::getline(hScore, tempName);
+		highScores.insert (std::pair<int,std::string>(tempScore, tempName) );
+	}
+
 	srand(time(0));
 	hasRed = false;
 	errorL->hide();
@@ -481,6 +492,7 @@ void MainWindow::startGame(){
 
 	// reset the level
 	level = 0;
+	attack = 0;
 	// make a new player ship
   human = new Player(apl,300,500,this);
   gameScene->addItem(human);
@@ -509,17 +521,18 @@ void MainWindow::nextLevel(){
 }
 
 void MainWindow::newLevel(int l){
+	attack += 1;
 	// clear the beam deque, intialize variables
 	if(attack == 1){
-		  QBrush back1(bg1);
+		  QBrush back1(*bg1);
  			gameScene->setBackgroundBrush(back1);
 	}
 	else if(attack == 2){
-		  QBrush back2(bg2);
+		  QBrush back2(*bg2);
  			gameScene->setBackgroundBrush(back2);
 	}
 	else if(attack == 3){
-		  QBrush back3(bg3);
+		  QBrush back3(*bg3);
  			gameScene->setBackgroundBrush(back3);
 	
 	}
@@ -528,7 +541,6 @@ void MainWindow::newLevel(int l){
 	ecount = 0;
 	// make the game faster
 	gameSpeed = gameSpeed * 3 / 5 + 1;
-	attack += 1;
 	maxhp += 5;
 	if(l == 1){gameSpeed = 15; maxhp = 10; attack = 1;}
 	timer->setInterval(gameSpeed);
@@ -560,7 +572,17 @@ void MainWindow::endLevel(){
 	timer2->start();
 }
 
-void MainWindow::endGame(){
+void MainWindow::endGame(){	
+	highScores.insert (std::pair<int,std::string>(score, pName) );
+	highScores.erase(highScores.begin());
+	
+	std::ofstream outfile("highscores.txt");
+	std::multimap<int, std::string>::reverse_iterator it;
+	
+	for(it = highScores.rbegin(); it != highScores.rend(); ++it){
+		outfile << it->first << " " << it->second << std::endl;
+	}
+
 	// delete everything on screen
 	while(!ebullets.empty()){
 		delete ebullets[0];
