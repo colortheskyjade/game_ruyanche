@@ -16,7 +16,7 @@ A high-contrast themed shooting game based on Galaga and similar games. The play
 	* Characteristics
 		* HP: 4
 		* **Special**: Abduction
-			* Move downwards towards the player and "hover" there
+			* __AI__ Move downwards towards the player and "hover" there
 			* Fires a tractor beam
 			* If the player is hit by the beam, they will be "captured" and lose a life
 			* Mothership then flies off the screen and can be considered "dead" for the level
@@ -59,7 +59,7 @@ A high-contrast themed shooting game based on Galaga and similar games. The play
 	* Characteristics
 		* HP: 6
 		* Does not fire bullet
-		* When killed, will quickly move towards the player until it hits or goes offscreen
+		* __AI__ When killed, will quickly move towards the player until it hits or goes offscreen
 		* If player collides with the purple ship, they will lose a life
 	* Appearance
 		* Upside down purple jellyfish with black "X" for eyes
@@ -193,14 +193,22 @@ Notes:
 ### Game End
 ![End](images/endscreen.png "End")
 * End screen now also prints out the top 10 high scores
+* High scores are storedin a local document -> highscores.txt
+* Please don't touch that file ): It's very sensitive
 
 ### Level Backrounds
 * One
+
 ![one](images/background.png)
+
 * Two
+
 ![two](images/background2.png)
+
 * Three+
+
 ![three](images/background3.png)
+
 
 ### Credits
 * Graphics made in Adobe Photoshop CS6

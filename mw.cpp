@@ -620,12 +620,18 @@ void MainWindow::endLevel(){
 }
 
 void MainWindow::endGame(){	
+	if(!human){
+		return;
+	}
+	
+	timer->stop();
+	timer2->stop();
+	nextWave->hide();
 	highScores.insert (std::pair<int,std::string>(score, pName) );
 	highScores.erase(highScores.begin());
 	
 	std::ofstream outfile("highscores.txt");
 	std::multimap<int, std::string>::reverse_iterator it;
-	
 	
 	std::stringstream ss;
 	ss << "High Scores\n";
@@ -652,7 +658,6 @@ void MainWindow::endGame(){
 		delete enemies[0];
 		enemies.erase(enemies.begin());
 	}
-	timer->stop();
 	if(human) delete human;
 	human = NULL;
 	nameB->setVisible(true);
