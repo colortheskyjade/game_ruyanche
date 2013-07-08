@@ -118,7 +118,7 @@ class MainWindow : public QMainWindow{
 		
 		QVBoxLayout *layout;
 		QHBoxLayout *layout2, *layout3;
-  	QWidget *holder, *holder2, *holder3;
+  		QWidget *holder, *holder2, *holder3;
 		
 		std::string pName;
 		QString playerName;
