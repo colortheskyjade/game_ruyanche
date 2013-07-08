@@ -11,30 +11,30 @@ MainWindow::MainWindow() : QMainWindow(){
 	pauseMe = 0;
 	human = NULL;
 	anim = 0;
-	
+
 	// Master Timer
 	timer = new QTimer;
 	gameSpeed = 14;
 	timer->setInterval(gameSpeed);
 	srand(time(0));
-	
+
 	// Secondary Timer
 	timer2 = new QTimer;
 	timer2->setInterval(100);
-	
+
 	// Load ALL THE PICTURES
 	ab1 = new QPixmap("images/actualblue-1.png");
-  ab2 = new QPixmap("images/actualblue-2.png");
-  ag1 = new QPixmap("images/actualgreen-1.png");
-  ag2 = new QPixmap("images/actualgreen-2.png");
-  apl = new QPixmap("images/actualplayer.png");
-  ap = new QPixmap("images/actualpurple.png");
-  ar1 = new QPixmap("images/actualred-1.png");
-  ar2 = new QPixmap("images/actualred-2.png");
-  ar3 = new QPixmap("images/actualred-3.png");
-  ay = new QPixmap("images/actualyellow.png");
-  app = new QPixmap("images/actualpink.png");
-  
+	ab2 = new QPixmap("images/actualblue-2.png");
+	ag1 = new QPixmap("images/actualgreen-1.png");
+	ag2 = new QPixmap("images/actualgreen-2.png");
+	apl = new QPixmap("images/actualplayer.png");
+	ap = new QPixmap("images/actualpurple.png");
+	ar1 = new QPixmap("images/actualred-1.png");
+	ar2 = new QPixmap("images/actualred-2.png");
+	ar3 = new QPixmap("images/actualred-3.png");
+	ay = new QPixmap("images/actualyellow.png");
+	app = new QPixmap("images/actualpink.png");
+
 	pbullet = new QPixmap("images/bullet.png");
 	bbullet = new QPixmap("images/bluebullet.png");
 	gbullet = new QPixmap("images/greenbullet.png");
@@ -43,11 +43,11 @@ MainWindow::MainWindow() : QMainWindow(){
 	widebulletpic = new QPixmap("images/redbullet.png");
 	heartpic = new QPixmap("images/heart.png");
 	rainbow = new QPixmap("images/rainbow.png");
-	
+
 	bg1 = new QPixmap("images/background.png");
 	bg2 = new QPixmap("images/background2.png");
 	bg3 = new QPixmap("images/background3.png");
-	
+
 	// This is for the hearts
 	h1 = new QGraphicsPixmapItem(*heartpic);
 	h1->setPos(400, 575);
@@ -64,116 +64,116 @@ MainWindow::MainWindow() : QMainWindow(){
 	h5 = new QGraphicsPixmapItem(*heartpic);
 	h5->setPos(300, 575);
 	h5->setVisible(false);
-  
+
 	// Initialize the Scenes and Views
-  gameScene = new GScene(this);
-  gameView = new QGraphicsView(gameScene);
-  mainScene = new QGraphicsScene;
+	gameScene = new GScene(this);
+	gameView = new QGraphicsView(gameScene);
+	mainScene = new QGraphicsScene;
 	mainView = new QGraphicsView(mainScene);
-  
-  mainView->setWindowTitle("Starships (were meant to fly...)");
-  
-  // Now add the hearts 
+
+	mainView->setWindowTitle("Starships (were meant to fly...)");
+
+	// Now add the hearts 
 	gameScene->addItem(h1);
 	gameScene->addItem(h2);
 	gameScene->addItem(h3);
 	gameScene->addItem(h4);
 	gameScene->addItem(h5);
-  
-  // Make the layouts
-  holder = new QWidget;
-  holder2 = new QWidget;
-  holder3 = new QWidget;
+
+	// Make the layouts
+	holder = new QWidget;
+	holder2 = new QWidget;
+	holder3 = new QWidget;
 	layout = new QVBoxLayout(holder);
 	layout2 = new QHBoxLayout(holder2);
 	layout3 = new QHBoxLayout(holder3);
-  
-  //Set the attributes to the game scene
-  QBrush bg(*bg1);
-  gameScene->setBackgroundBrush(bg);
-  gameScene->setSceneRect(0,0,425,600);
-  gameView->setFixedSize(430,605);
- 	gameView->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-  gameView->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-  
-  // Make buttons
-  // Players love buttons
-  startB = new QPushButton("Start");
-  startB->setGeometry(160, 475, 100, 60);
-  startB->setStyleSheet("background-color:rgba(0,0,0,0); color:#ffffff; font-size:36px;");
-  gameScene->addWidget(startB);
-   
-  restartB = new QPushButton("Start");
-  restartB->setFixedHeight(28);
-  pauseB = new QPushButton("Pause");
-  pauseB->setFixedHeight(28);
-  endB = new QPushButton("Quit");
-  endB->setFixedHeight(28);
-  
-  nameB = new QTextEdit;
-  nameB->setFixedHeight(28);
-  nameB->setStyleSheet("background-color:rgb(0,0,0); color:#ffffff;");
 
-  // Connecting the timers and buttons 
-  connect(timer, SIGNAL(timeout()), this, SLOT(handleTimer()));
-  connect(timer2, SIGNAL(timeout()), this, SLOT(nextLevel()));
-  connect(startB, SIGNAL(clicked()), this, SLOT(startGame()));
-  connect(pauseB, SIGNAL(clicked()), this, SLOT(pauseGame()));
-  connect(endB, SIGNAL(clicked()), this , SLOT(quitGame()));
-  connect(restartB, SIGNAL(clicked()), this , SLOT(restartGame()));
-  
-  // Make the labels  
-  nameL = new QTextEdit;
-  nameL->setStyleSheet("background-color:rgb(0,0,0); color:#ffffff;");
-  nameL->setFixedHeight(28);
-  nameL->setFixedWidth(200);
-  nameL->setReadOnly(true);
-  layout3->addWidget(nameL);
-    
-  scoreL = new QTextEdit;
-  scoreL->setStyleSheet("background-color:rgb(0,0,0); color:#ffffff;");
-  scoreL->setFixedHeight(28);
-  scoreL->setFixedWidth(130);
-  scoreL->setReadOnly(true);
-  layout3->addWidget(scoreL);
-  
-  hpL = new QTextEdit;
-  hpL->setStyleSheet("background-color:rgb(0,0,0); color:#ffffff;");
-  hpL->setFixedHeight(28);
-  hpL->setFixedWidth(80);
-  hpL->setReadOnly(true);
-  layout3->addWidget(hpL);
-  
-  errorL = new QLabel;
-  errorL->setStyleSheet("background-color:rgba(0,0,0,1); color:#ffffff; font-size:24px;");
-  errorL->setGeometry(QRect(60,520,380,80));
-  gameScene->addWidget(errorL);
-  
-  nextWave = new QLabel("Get ready for the next wave!");
-  nextWave->setStyleSheet("background-color:rgba(0,0,0,1); color:#ffffff; font-size:24px;");
-  nextWave->setGeometry(QRect(55,220,380,80));
-  nextWave->hide();
-  gameScene->addWidget(nextWave);
-  
-  endScore = new QLabel;
-  endScore->setStyleSheet("background-color:rgba(0,0,0,1); color:#ffffff; font-size:26px;");
-  endScore->setGeometry(QRect(0,40,425,80));
-  endScore->setAlignment(Qt::AlignCenter);
-  endScore->hide();
-  gameScene->addWidget(endScore);
-  
-  scoreList = new QLabel;
-  scoreList->setStyleSheet("background-color:rgba(0,0,0,1); color:#ffffff; font-size:26px;");
-  scoreList->setGeometry(QRect(0,55,425,500));
-  scoreList->setAlignment(Qt::AlignCenter);
-  scoreList->hide();
-  gameScene->addWidget(scoreList);
-  
-  // Set the layouts
-  layout2->addWidget(restartB);
-  layout2->addWidget(pauseB);
-  layout2->addWidget(endB);
-  layout->addWidget(holder2);
+	//Set the attributes to the game scene
+	QBrush bg(*bg1);
+	gameScene->setBackgroundBrush(bg);
+	gameScene->setSceneRect(0,0,425,600);
+	gameView->setFixedSize(430,605);
+	gameView->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+	gameView->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+
+	// Make buttons
+	// Players love buttons
+	startB = new QPushButton("Start");
+	startB->setGeometry(160, 475, 100, 60);
+	startB->setStyleSheet("background-color:rgba(0,0,0,0); color:#ffffff; font-size:36px;");
+	gameScene->addWidget(startB);
+
+	restartB = new QPushButton("Start");
+	restartB->setFixedHeight(28);
+	pauseB = new QPushButton("Pause");
+	pauseB->setFixedHeight(28);
+	endB = new QPushButton("Quit");
+	endB->setFixedHeight(28);
+
+	nameB = new QTextEdit;
+	nameB->setFixedHeight(28);
+	nameB->setStyleSheet("background-color:rgb(0,0,0); color:#ffffff;");
+
+	// Connecting the timers and buttons 
+	connect(timer, SIGNAL(timeout()), this, SLOT(handleTimer()));
+	connect(timer2, SIGNAL(timeout()), this, SLOT(nextLevel()));
+	connect(startB, SIGNAL(clicked()), this, SLOT(startGame()));
+	connect(pauseB, SIGNAL(clicked()), this, SLOT(pauseGame()));
+	connect(endB, SIGNAL(clicked()), this , SLOT(quitGame()));
+	connect(restartB, SIGNAL(clicked()), this , SLOT(restartGame()));
+
+	// Make the labels  
+	nameL = new QTextEdit;
+	nameL->setStyleSheet("background-color:rgb(0,0,0); color:#ffffff;");
+	nameL->setFixedHeight(28);
+	nameL->setFixedWidth(200);
+	nameL->setReadOnly(true);
+	layout3->addWidget(nameL);
+
+	scoreL = new QTextEdit;
+	scoreL->setStyleSheet("background-color:rgb(0,0,0); color:#ffffff;");
+	scoreL->setFixedHeight(28);
+	scoreL->setFixedWidth(130);
+	scoreL->setReadOnly(true);
+	layout3->addWidget(scoreL);
+
+	hpL = new QTextEdit;
+	hpL->setStyleSheet("background-color:rgb(0,0,0); color:#ffffff;");
+	hpL->setFixedHeight(28);
+	hpL->setFixedWidth(80);
+	hpL->setReadOnly(true);
+	layout3->addWidget(hpL);
+
+	errorL = new QLabel;
+	errorL->setStyleSheet("background-color:rgba(0,0,0,1); color:#ffffff; font-size:24px;");
+	errorL->setGeometry(QRect(60,520,380,80));
+	gameScene->addWidget(errorL);
+
+	nextWave = new QLabel("Get ready for the next wave!");
+	nextWave->setStyleSheet("background-color:rgba(0,0,0,1); color:#ffffff; font-size:24px;");
+	nextWave->setGeometry(QRect(55,220,380,80));
+	nextWave->hide();
+	gameScene->addWidget(nextWave);
+
+	endScore = new QLabel;
+	endScore->setStyleSheet("background-color:rgba(0,0,0,1); color:#ffffff; font-size:26px;");
+	endScore->setGeometry(QRect(0,40,425,80));
+	endScore->setAlignment(Qt::AlignCenter);
+	endScore->hide();
+	gameScene->addWidget(endScore);
+
+	scoreList = new QLabel;
+	scoreList->setStyleSheet("background-color:rgba(0,0,0,1); color:#ffffff; font-size:26px;");
+	scoreList->setGeometry(QRect(0,55,425,500));
+	scoreList->setAlignment(Qt::AlignCenter);
+	scoreList->hide();
+	gameScene->addWidget(scoreList);
+
+	// Set the layouts
+	layout2->addWidget(restartB);
+	layout2->addWidget(pauseB);
+	layout2->addWidget(endB);
+	layout->addWidget(holder2);
 	layout->addWidget(gameView);
 	layout->addWidget(nameB);
 	holder3->setVisible(false);
@@ -184,19 +184,19 @@ MainWindow::MainWindow() : QMainWindow(){
 	layout2->setMargin(0);
 	layout3->setContentsMargins(0, 0, 0, 0);
 	layout3->setMargin(0);
-	
-  mainScene->addWidget(holder);
-  mainView->setFixedSize(460,710);
- 	mainView->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-  mainView->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-  
-  // Setting these for faster rendering
-  gameView->setAttribute(Qt::WA_OpaquePaintEvent);
-  gameView->setAttribute(Qt::WA_NoSystemBackground);
- 	mainView->setAttribute(Qt::WA_OpaquePaintEvent);
-  mainView->setAttribute(Qt::WA_NoSystemBackground);
-  mainView->setViewportUpdateMode(QGraphicsView::FullViewportUpdate);
-  gameView->setViewportUpdateMode(QGraphicsView::FullViewportUpdate);
+
+	mainScene->addWidget(holder);
+	mainView->setFixedSize(460,710);
+	mainView->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+	mainView->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+
+	// Setting these for faster rendering
+	gameView->setAttribute(Qt::WA_OpaquePaintEvent);
+	gameView->setAttribute(Qt::WA_NoSystemBackground);
+	mainView->setAttribute(Qt::WA_OpaquePaintEvent);
+	mainView->setAttribute(Qt::WA_NoSystemBackground);
+	mainView->setViewportUpdateMode(QGraphicsView::FullViewportUpdate);
+	gameView->setViewportUpdateMode(QGraphicsView::FullViewportUpdate);
 }
 
 //****************************
